@@ -64,6 +64,13 @@ body {
   background-image: radial-gradient(67% 20% at var(--gradient-x, 82%) var(--gradient-y, 0%), #E5592282 0%, #EDE44C7A 17%, #6DECC778 39%, #5AB7EF7D 58%, #8E58B763 75%, #5A337D33 88%, #0000006E 100%),radial-gradient(75% 75% at 21% 29%, #00000087 0%, #0000006B 100%);
 }
 
+/* Dotted underline for active menu links */
+.dotted-underline {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+}
+
 /* Button styling */
 .btn-custom {
   background-color: #262626;
