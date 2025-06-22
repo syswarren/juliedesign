@@ -1,6 +1,21 @@
+import type { Metadata } from 'next';
 import FloatingMenu from '@/components/FloatingMenu';
 import WorkExperience from '@/components/WorkExperience';
 import { workExperiences } from '@/data/workExperienceData';
+
+export const metadata: Metadata = {
+  title: 'About — Julie Chabin',
+  description: 'Product designer with 15+ years in tech, formerly Head of Product Design at Product Hunt. Now helping early-stage startups shape their first products and brands.',
+  openGraph: {
+    title: 'About — Julie Chabin',
+    description: 'Product designer with 15+ years in tech, formerly Head of Product Design at Product Hunt. Now helping early-stage startups shape their first products and brands.',
+    url: 'https://juliechabin.com/about',
+  },
+  twitter: {
+    title: 'About — Julie Chabin',
+    description: 'Product designer with 15+ years in tech, formerly Head of Product Design at Product Hunt. Now helping early-stage startups shape their first products and brands.',
+  },
+};
 
 export default function AboutPage() {
   return (

@@ -4,7 +4,36 @@ import FloatingMenu from '@/components/FloatingMenu';
 import { updates } from '@/data/updatesData';
 import Image from 'next/image';
 
+// Utility function to convert date to relative format
+function getRelativeDate(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  if (diffInDays === 0) {
+    return 'today';
+  } else if (diffInDays === 1) {
+    return 'yesterday';
+  } else if (diffInDays < 7) {
+    return `${diffInDays}d ago`;
+  } else if (diffInDays < 30) {
+    const weeks = Math.floor(diffInDays / 7);
+    return `${weeks}w ago`;
+  } else {
+    const months = Math.floor(diffInDays / 30);
+    return `${months}mo ago`;
+  }
+}
+
 export default function UpdatesPage() {
+  // Filter out future posts
+  const currentDate = new Date();
+  const filteredUpdates = updates.filter(update => {
+    const updateDate = new Date(update.date);
+    return updateDate <= currentDate;
+  });
+
   return (
     <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
       {/* Floating Menu */}
@@ -21,7 +50,7 @@ export default function UpdatesPage() {
       {/* Updates List */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         <div className="space-y-12">
-          {updates.map((update) => (
+          {filteredUpdates.map((update) => (
             <article 
               key={update.id} 
               id={update.id}
@@ -30,7 +59,7 @@ export default function UpdatesPage() {
               {/* Date */}
               <div className="mb-6">
                 <time className="text-true-gray-400 page-text text-sm">
-                  {update.date}
+                  {getRelativeDate(update.date)}
                 </time>
               </div>
 

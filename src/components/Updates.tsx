@@ -15,11 +15,40 @@ interface UpdatesProps {
   updates: UpdateData[];
 }
 
+// Utility function to convert date to relative format
+function getRelativeDate(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  if (diffInDays === 0) {
+    return 'today';
+  } else if (diffInDays === 1) {
+    return 'yesterday';
+  } else if (diffInDays < 7) {
+    return `${diffInDays}d ago`;
+  } else if (diffInDays < 30) {
+    const weeks = Math.floor(diffInDays / 7);
+    return `${weeks}w ago`;
+  } else {
+    const months = Math.floor(diffInDays / 30);
+    return `${months}mo ago`;
+  }
+}
+
 export default function Updates({ updates }: UpdatesProps) {
+  // Filter out future posts
+  const currentDate = new Date();
+  const filteredUpdates = updates.filter(update => {
+    const updateDate = new Date(update.date);
+    return updateDate <= currentDate;
+  });
+
   return (
     <div>
       <div className="space-y-6">
-        {updates.map((update, index) => {
+        {filteredUpdates.map((update, index) => {
           // Extract images from content for preview
           const images = update.content
             .filter(item => typeof item === 'object' && item.type === 'image')
@@ -68,7 +97,7 @@ export default function Updates({ updates }: UpdatesProps) {
                 {/* Date */}
                 <div className="flex-shrink-0 text-right ml-4">
                   <p className="text-true-gray-400 page-text text-sm">
-                    {update.date}
+                    {getRelativeDate(update.date)}
                   </p>
                 </div>
               </div>
