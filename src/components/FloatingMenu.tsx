@@ -39,19 +39,23 @@ export default function FloatingMenu() {
   return (
     <nav 
       ref={menuRef}
-      className="distort fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/10 border-b border-white/20 shadow-xl rounded-full px-6 py-4 space-x-6 flex items-center"
+      className="distort fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-white/10 border-b border-white/20 shadow-xl rounded-full px-6 py-3 space-x-6 flex items-center"
       style={{
         '--gradient-x': '82%',
         '--gradient-y': '0%'
       } as React.CSSProperties}
     >
-      <ul className="flex items-center space-x-1">
+      <ul className="flex items-center space-x-4">
         <li>
           <Link 
             href="/" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-4 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
               isActive('/') ? 'text-white dotted-underline' : ''
             }`}
+            style={{ 
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', 
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }}
           >
             Home
           </Link>
@@ -59,9 +63,13 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/updates" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-4 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
               isActive('/updates') ? 'text-white dotted-underline' : ''
             }`}
+            style={{ 
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', 
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }}
           >
             Updates
           </Link>
@@ -69,9 +77,13 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/about" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-4 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
               isActive('/about') ? 'text-white dotted-underline' : ''
             }`}
+            style={{ 
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', 
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }}
           >
             About
           </Link>
@@ -79,9 +91,13 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/contact" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-4 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
               isActive('/contact') ? 'text-white dotted-underline' : ''
             }`}
+            style={{ 
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', 
+              backgroundColor: 'rgba(0, 0, 0, 0.1)'
+            }}
           >
             Contact
           </Link>

@@ -5,19 +5,19 @@ export interface WorkPrinciple {
 
 export const workPrinciples: WorkPrinciple[] = [
   {
-    title: "Design is a communication tool",
-    description: "Designers are visual communicators. They can't tell a story they don't understand. Researching and collecting information is part of the job."
+    title: "Design is understanding",
+    description: "Good design makes hard things feel simple. It's informed, intentional, and grounded in real insight."
   },
   {
-    title: "Design is never done",
-    description: "Design work doesn't end when mockups are shared with engineers. It's an ongoing process of refining and improving the experience."
+    title: "Product is never done",
+    description: "The job doesn't end on launch day. It's a cycle of testing, learning, and continuous improvement."
   },
   {
     title: "\"Lazy\" is a short way to say efficient",
-    description: "If there's a faster, smarter way to achieve great results, that's the path to take. I prioritize experimentation over rigid processes."
+    description: "If there's a faster, smarter way to get great results, take it. Outcomes matter more than process."
   },
   {
-    title: "Vision and strategy",
-    description: "I take a strategic approach, thinking far ahead once I understand a system. I'm precise and patient in planning, and I'm 'annoyingly good at sequencing work'."
+    title: "Strategy is early pattern recognition",
+    description: "Look three years ahead. Spot patterns, map systems, and sequence work with intent."
   }
 ]; 
