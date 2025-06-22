@@ -22,7 +22,7 @@ export default function AboutPage() {
         {/* Bio */}
         <section className="w-full flex flex-col" style={{ paddingTop: '10px', paddingBottom: '32px' }}>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            I&rsquo;m Julie Chabin, a product designer and strategist with over 8 years of experience building digital products that people love to use.
+            I'm Julie Chabin, a product designer and strategist with over 8 years of experience building digital products that people love to use.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
             My journey started in 2015 when I joined Product Hunt as their first designer. Over the next 6 years, I helped scale the platform from a small startup to a global community of makers, creators, and entrepreneurs.
@@ -31,16 +31,7 @@ export default function AboutPage() {
             At Product Hunt, I led design across all products, from the main discovery platform to mobile apps, email products, and internal tools. I worked closely with the founding team to shape product strategy, design systems, and user experience.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Since leaving Product Hunt in 2021, I&rsquo;ve been working with early-stage startups and founders to help them build their first products, raise funding, and get noticed in crowded markets.
-          </p>
-          <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            I help turn ideas into real, thoughtful products—easy to use, hard to ignore, and ready to grow.
-          </p>
-          <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Previously, I led design at Product Hunt. I created features, shaped strategy, and scaled design with a small, fast-moving remote team.
-          </p>
-          <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Now I work with founders to shape their product&rsquo;s first version, raise funds, and get noticed. I also build my own tools. It starts with curiosity, and always ends in learning.
+            Since leaving Product Hunt in 2021, I've been working with early-stage startups and founders to help them build their first products, raise funding, and get noticed in crowded markets.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
             I believe great design is invisible—it should feel effortless and intuitive. My approach combines user research, rapid prototyping, and strategic thinking to create products that solve real problems.
@@ -49,7 +40,7 @@ export default function AboutPage() {
 
         {/* Company Logos */}
         <section className="w-full py-12 flex flex-col">
-          <h2 className="font-semibold mb-4 text-left text-white page-text">Companies I&rsquo;ve worked with</h2>
+          <h2 className="font-semibold mb-4 text-left text-white page-text">Companies I've worked with</h2>
           <CompanyLogos />
         </section>
 
@@ -94,7 +85,7 @@ export default function AboutPage() {
         <section className="w-full py-12 flex flex-col">
           <h2 className="font-semibold mb-6 text-left text-white page-text">Get in touch</h2>
           <p className="mb-6 text-true-gray-300 paragraph-text">
-            I&rsquo;m always interested in hearing about new opportunities and interesting projects. Whether you&rsquo;re a founder looking for design help, a company building a product team, or just want to chat about design and products, feel free to reach out.
+            I'm always interested in hearing about new opportunities and interesting projects. Whether you're a founder looking for design help, a company building a product team, or just want to chat about design and products, feel free to reach out.
           </p>
           <div className="space-y-3">
             <a href="mailto:hello@juliechabin.com" className="block text-true-gray-400 page-text hover:text-white transition-colors">

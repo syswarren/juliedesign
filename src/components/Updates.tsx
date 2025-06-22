@@ -1,7 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { UpdateData } from '@/types';
+
+interface UpdateData {
+  title: string;
+  subtitle: string;
+  content: (string | { type: 'image'; src: string; alt?: string })[];
+  date: string;
+  id?: string;
+}
 
 interface UpdatesProps {
   updates: UpdateData[];

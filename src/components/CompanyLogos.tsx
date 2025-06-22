@@ -1,11 +1,5 @@
-import { CompanyLogo } from '@/types';
-
-interface CompanyLogosProps {
-  logos?: CompanyLogo[];
-}
-
-export default function CompanyLogos({ logos }: CompanyLogosProps) {
-  const defaultLogos: CompanyLogo[] = [
+export default function CompanyLogos() {
+  const logos = [
     {
       name: "AngelList",
       src: "/company-logos/cloud/angellist.png",
@@ -41,12 +35,10 @@ export default function CompanyLogos({ logos }: CompanyLogosProps) {
     }
   ];
 
-  const displayLogos = logos || defaultLogos;
-
   return (
     <div className="py-12">
       <div className="mx-auto flex flex-wrap justify-center items-center gap-8 max-w-lg sm:max-w-xl lg:max-w-none">
-        {displayLogos.map((logo, index) => (
+        {logos.map((logo, index) => (
           <img
             key={index}
             alt={logo.alt}

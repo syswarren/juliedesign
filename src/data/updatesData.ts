@@ -1,4 +1,10 @@
-import { UpdateData } from '@/types';
+export interface UpdateData {
+  id: string;
+  title: string;
+  subtitle: string;
+  content: (string | { type: 'image'; src: string; alt?: string })[];
+  date: string;
+}
 
 // Import individual updates
 import { updateData as update22062025 } from './updates/22062025/data';
