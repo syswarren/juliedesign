@@ -49,7 +49,7 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
               isActive('/') ? 'text-white dotted-underline' : ''
             }`}
             style={{ 
@@ -63,7 +63,7 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/updates" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
               isActive('/updates') ? 'text-white dotted-underline' : ''
             }`}
             style={{ 
@@ -71,13 +71,13 @@ export default function FloatingMenu() {
               backgroundColor: 'rgba(0, 0, 0, 0.1)'
             }}
           >
-            Updates
+            Now
           </Link>
         </li>
         <li>
           <Link 
             href="/about" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
               isActive('/about') ? 'text-white dotted-underline' : ''
             }`}
             style={{ 
@@ -85,13 +85,13 @@ export default function FloatingMenu() {
               backgroundColor: 'rgba(0, 0, 0, 0.1)'
             }}
           >
-            About
+            About me
           </Link>
         </li>
         <li>
           <Link 
             href="/contact" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
               isActive('/contact') ? 'text-white dotted-underline' : ''
             }`}
             style={{ 
@@ -99,7 +99,7 @@ export default function FloatingMenu() {
               backgroundColor: 'rgba(0, 0, 0, 0.1)'
             }}
           >
-            Contact
+            Say hi
           </Link>
         </li>
       </ul>

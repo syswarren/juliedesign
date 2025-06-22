@@ -92,14 +92,19 @@ body {
   border-color: #5c5e5f;
 }
 
-/* Universal text styling */
+/* Font classes */
+.jacquard-font {
+  font-family: 'Jacquard 12', serif;
+  font-size: 18px;
+}
+
+/* Custom text styles */
 .page-text {
   font-style: normal;
   font-size: 14px;
   line-height: 20px;
 }
 
-/* Paragraph styling */
 .paragraph-text {
   font-style: normal;
   font-weight: 450;

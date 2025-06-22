@@ -1,8 +1,4 @@
-export interface GalleryItem {
-  id: number;
-  src: string;
-  alt: string;
-}
+import { GalleryItem } from '@/types';
 
 export const galleryItems: GalleryItem[] = [
   {

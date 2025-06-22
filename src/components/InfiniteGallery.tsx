@@ -1,13 +1,8 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
-
-interface GalleryItem {
-  id: number;
-  src: string;
-  alt: string;
-}
+import { GalleryItem } from '@/types';
 
 interface InfiniteGalleryProps {
   items: GalleryItem[];
@@ -103,12 +98,6 @@ export default function InfiniteGallery({
                 sizes="60vh"
                 className="gallery-image"
                 style={{ height: '60vh', width: 'auto' }}
-                onError={(e) => {
-                  console.error('Failed to load image:', item.src);
-                }}
-                onLoad={() => {
-                  console.log('Successfully loaded image:', item.src);
-                }}
               />
             </div>
           ))}
@@ -124,12 +113,6 @@ export default function InfiniteGallery({
                 sizes="60vh"
                 className="gallery-image"
                 style={{ height: '60vh', width: 'auto' }}
-                onError={(e) => {
-                  console.error('Failed to load image:', item.src);
-                }}
-                onLoad={() => {
-                  console.log('Successfully loaded image:', item.src);
-                }}
               />
             </div>
           ))}

@@ -50,9 +50,9 @@ export default function HiddenFooter() {
       {/* Footer Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-white px-6" style={{ minHeight: '50vh' }}>
         <div className="text-center">
-          <h2 className="text-6xl mt-10 mb-1" style={{ fontFamily: '"Jacquard 12", serif', fontWeight: 'normal', textShadow: '4px -4px #000000' }}>Digital dreaming since 1998</h2>
-          <div className="text-sm text-gray-300">
-            © {new Date().getFullYear()} Julie Design. All rights reserved.
+          <h2 className="text-4xl mt-10 mb-1" style={{ fontFamily: '"Jacquard 12", serif', fontWeight: 'normal', textShadow: '2px -2px #000000' }}>Digital dreaming since 1998</h2>
+          <div className="text-sm text-white">
+            © {new Date().getFullYear()} All rights reserved.
           </div>
         </div>
       </div>

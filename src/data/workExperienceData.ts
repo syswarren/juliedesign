@@ -1,38 +1,32 @@
-export interface WorkExperienceItem {
-  logo: string;
-  company: string;
-  title: string;
-  startDate: string;
-  endDate: string;
-}
+import { WorkExperience } from '@/types';
 
-export const workExperiences: WorkExperienceItem[] = [
+export const workExperiences: WorkExperience[] = [
   {
-    logo: "/company-logos/coven.png",
+    id: 1,
     company: "Coven",
-    title: "Freelance Product Designer",
-    startDate: "2023",
-    endDate: "Present"
+    role: "Freelance Product Designer",
+    period: "2023 - Present",
+    description: "Freelance product design work"
   },
   {
-    logo: "/company-logos/producthunt_logo.jpeg",
+    id: 2,
     company: "Product Hunt",
-    title: "Head of Product Design",
-    startDate: "2018",
-    endDate: "2023"
+    role: "Head of Product Design",
+    period: "2018 - 2023",
+    description: "Led design at Product Hunt, created features, shaped strategy, and scaled design with a small, fast-moving remote team"
   },
   {
-    logo: "/company-logos/angellist_logo.jpeg",
+    id: 3,
     company: "AngelList",
-    title: "Senior Product Designer",
-    startDate: "2017",
-    endDate: "2018"
+    role: "Senior Product Designer",
+    period: "2017 - 2018",
+    description: "Senior product design role"
   },
   {
-    logo: "/company-logos/tm_sf_logo.jpeg",
+    id: 4,
     company: "TM",
-    title: "Senior Product Designer",
-    startDate: "2015",
-    endDate: "2017"
+    role: "Senior Product Designer",
+    period: "2015 - 2017",
+    description: "Senior product design role"
   }
 ]; 
