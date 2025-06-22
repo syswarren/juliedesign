@@ -35,7 +35,7 @@ export default function Home() {
             Previously, I led design at Product Hunt. I created features, shaped strategy, and scaled design with a small, fast-moving remote team.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Now I work with founders to shape their product's first version, raise funds, and get noticed. I also build my own tools. It starts with curiosity, and always ends in learning.
+            Now I work with founders to shape their product&apos;s first version, raise funds, and get noticed. I also build my own tools. It starts with curiosity, and always ends in learning.
           </p>
           <a href="#contact" className="px-6 py-2 mt-4 btn-custom w-fit page-text rounded-full">Say hi</a>
         </section>
@@ -50,7 +50,7 @@ export default function Home() {
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8 rounded-b-3xl bg-true-gray-800 mb-64" style={{ maxWidth: '600px' }}>
         {/* Company Logos */}
         <section className="w-full py-4 flex flex-col">
-          <h2 className="font-normal mb-4 text-center text-true-gray-400 page-text">Teams I've collaborated with</h2>
+          <h2 className="font-normal mb-4 text-center text-true-gray-400 page-text">Teams I&apos;ve collaborated with</h2>
           <CompanyLogos />
         </section>
 

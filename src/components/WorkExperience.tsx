@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 interface WorkExperienceItem {
   logo: string;
   company: string;
@@ -22,9 +24,11 @@ export default function WorkExperience({ experiences }: WorkExperienceProps) {
           >
             {/* Logo */}
             <div className="flex-shrink-0 mr-4">
-              <img 
+              <Image 
                 src={experience.logo} 
                 alt={`${experience.company} logo`}
+                width={48}
+                height={48}
                 className="w-12 h-12 rounded-xs object-cover"
               />
             </div>

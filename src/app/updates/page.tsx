@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import FloatingMenu from '@/components/FloatingMenu';
 import { updates } from '@/data/updatesData';
+import Image from 'next/image';
 
 export default function UpdatesPage() {
   return (
@@ -21,7 +21,7 @@ export default function UpdatesPage() {
       {/* Updates List */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         <div className="space-y-12">
-          {updates.map((update, index) => (
+          {updates.map((update) => (
             <article 
               key={update.id} 
               id={update.id}
@@ -57,10 +57,11 @@ export default function UpdatesPage() {
                     } else if (item.type === 'image') {
                       return (
                         <div key={itemIndex} className="relative aspect-video">
-                          <img 
+                          <Image 
                             src={item.src} 
                             alt={item.alt || `Update image ${itemIndex + 1}`}
-                            className="w-full h-full rounded-lg object-cover"
+                            fill
+                            className="rounded-lg object-cover"
                           />
                         </div>
                       );

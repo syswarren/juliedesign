@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 
 interface GalleryItem {
@@ -93,7 +93,7 @@ export default function InfiniteGallery({
         onTouchEnd={handleTouchEnd}
       >
         <div className={`gallery-slides-wrapper ${isPaused ? 'paused' : ''}`}>
-          {items.map((item) => (
+          {items.map((item, index) => (
             <div key={item.id} className="gallery-image-container">
               <Image
                 src={item.src}
@@ -101,20 +101,21 @@ export default function InfiniteGallery({
                 width={0}
                 height={0}
                 sizes="60vh"
+                priority={index === 0}
                 className="gallery-image"
                 style={{ height: '60vh', width: 'auto' }}
-                onError={(e) => {
+                onError={() => {
                   console.error('Failed to load image:', item.src);
                 }}
                 onLoad={() => {
-                  console.log('Successfully loaded image:', item.src);
+                  // Image loaded successfully
                 }}
               />
             </div>
           ))}
         </div>
         <div className={`gallery-slides-wrapper ${isPaused ? 'paused' : ''}`}>
-          {items.map((item) => (
+          {items.map((item, index) => (
             <div key={`duplicate-${item.id}`} className="gallery-image-container">
               <Image
                 src={item.src}
@@ -122,13 +123,14 @@ export default function InfiniteGallery({
                 width={0}
                 height={0}
                 sizes="60vh"
+                priority={index === 0}
                 className="gallery-image"
                 style={{ height: '60vh', width: 'auto' }}
-                onError={(e) => {
+                onError={() => {
                   console.error('Failed to load image:', item.src);
                 }}
                 onLoad={() => {
-                  console.log('Successfully loaded image:', item.src);
+                  // Image loaded successfully
                 }}
               />
             </div>

@@ -1,6 +1,5 @@
 import FloatingMenu from '@/components/FloatingMenu';
 import WorkExperience from '@/components/WorkExperience';
-import CompanyLogos from '@/components/CompanyLogos';
 import { workExperiences } from '@/data/workExperienceData';
 
 export default function AboutPage() {
@@ -22,82 +21,35 @@ export default function AboutPage() {
         {/* Bio */}
         <section className="w-full flex flex-col" style={{ paddingTop: '10px', paddingBottom: '32px' }}>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            I'm Julie Chabin, a product designer and strategist with over 8 years of experience building digital products that people love to use.
+            I&apos;m Julie Chabin. I design digital products, shape brands, and build tools—mostly for early-stage startups where nothing exists yet, and everything needs to happen fast.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            My journey started in 2015 when I joined Product Hunt as their first designer. Over the next 6 years, I helped scale the platform from a small startup to a global community of makers, creators, and entrepreneurs.
+            I&apos;ve spent over 15 years in tech, most notably leading Product Design at Product Hunt from 2018 to 2023. Before that, I worked at AngelList, TM, and other product-focused teams where I learned how to ship fast, think systemically, and keep things simple.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            At Product Hunt, I led design across all products, from the main discovery platform to mobile apps, email products, and internal tools. I worked closely with the founding team to shape product strategy, design systems, and user experience.
+            Today, I work as a freelance product designer and advisor. I help founders define their first product, craft early brand and web presence, and get from idea to funding without wasting time on the wrong details.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Since leaving Product Hunt in 2021, I've been working with early-stage startups and founders to help them build their first products, raise funding, and get noticed in crowded markets.
+            Lately, I&apos;ve been working on AI-first tools—designing interfaces that balance clarity, speed, and trust in systems that learn as they go. It&apos;s a space full of hype, and I try to bring restraint, structure, and real usability into it.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            I believe great design is invisible—it should feel effortless and intuitive. My approach combines user research, rapid prototyping, and strategic thinking to create products that solve real problems.
+            Design, for me, isn&apos;t just UI. It&apos;s how a product communicates, how it feels, how it earns attention. I move between product design, web design, and brand depending on what the project needs. I don&apos;t believe in silos when the goal is to ship something real.
           </p>
-        </section>
-
-        {/* Company Logos */}
-        <section className="w-full py-12 flex flex-col">
-          <h2 className="font-semibold mb-4 text-left text-white page-text">Companies I've worked with</h2>
-          <CompanyLogos />
+          <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
+            When I&apos;m not designing for others, I build my own tools. Mostly out of curiosity. Sometimes out of frustration. I like solving the small, annoying problems that make life harder than it needs to be.
+          </p>
+          <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
+            I live in the sunny south of France with my partner, our daughter, and our cat (yes, he&apos;s just like the Product Hunt cat). I like to read fantasy, watch K-dramas, and play video games when I can. I speak English and French, sometimes both in the same sentence.
+          </p>
+          <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
+            Want the résumé version? Scroll down. Otherwise—say hi.
+          </p>
         </section>
 
         {/* Work Experience */}
         <section className="w-full py-12 flex flex-col">
           <h2 className="font-semibold mb-4 text-left text-white page-text">Work experience</h2>
           <WorkExperience experiences={workExperiences} />
-        </section>
-
-        {/* Skills & Expertise */}
-        <section className="w-full py-12 flex flex-col">
-          <h2 className="font-semibold mb-6 text-left text-white page-text">Skills & expertise</h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-medium text-white page-text mb-3">Product Design</h3>
-              <p className="text-true-gray-300 paragraph-text">
-                User experience design, interface design, design systems, prototyping, user research, and usability testing.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-medium text-white page-text mb-3">Product Strategy</h3>
-              <p className="text-true-gray-300 paragraph-text">
-                Product vision, roadmap planning, feature prioritization, market analysis, and competitive research.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-medium text-white page-text mb-3">Leadership</h3>
-              <p className="text-true-gray-300 paragraph-text">
-                Design team management, cross-functional collaboration, stakeholder communication, and mentorship.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-medium text-white page-text mb-3">Tools & Technologies</h3>
-              <p className="text-true-gray-300 paragraph-text">
-                Figma, Sketch, Adobe Creative Suite, HTML/CSS, JavaScript, React, and various prototyping tools.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Contact */}
-        <section className="w-full py-12 flex flex-col">
-          <h2 className="font-semibold mb-6 text-left text-white page-text">Get in touch</h2>
-          <p className="mb-6 text-true-gray-300 paragraph-text">
-            I'm always interested in hearing about new opportunities and interesting projects. Whether you're a founder looking for design help, a company building a product team, or just want to chat about design and products, feel free to reach out.
-          </p>
-          <div className="space-y-3">
-            <a href="mailto:hello@juliechabin.com" className="block text-true-gray-400 page-text hover:text-white transition-colors">
-              hello@juliechabin.com
-            </a>
-            <a href="https://twitter.com/juliechabin" className="block text-true-gray-400 page-text hover:text-white transition-colors">
-              @juliechabin
-            </a>
-            <a href="https://linkedin.com/in/juliechabin" className="block text-true-gray-400 page-text hover:text-white transition-colors">
-              LinkedIn
-            </a>
-          </div>
         </section>
       </div>
     </div>

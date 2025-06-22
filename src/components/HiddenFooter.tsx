@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export default function HiddenFooter() {
   const footerRef = useRef<HTMLElement>(null);
@@ -39,10 +40,11 @@ export default function HiddenFooter() {
     >
       {/* Background */}
       <div className="absolute inset-0 bg-true-gray-800 overflow-hidden">
-        <img
+        <Image
           src="/footer.png"
           alt="Footer background"
-          className="w-full h-full object-cover"
+          fill
+          className="object-cover"
           style={{ filter: 'brightness(1)', opacity: 0.7 }}
         />
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface UpdateData {
   title: string;
@@ -47,10 +48,12 @@ export default function Updates({ updates }: UpdatesProps) {
                   {images.length > 0 && (
                     <div className="flex gap-3 mb-2 mt-3 flex-wrap">
                       {images.slice(0, 3).map((image, imageIndex) => (
-                        <img 
+                        <Image 
                           key={imageIndex}
                           src={image} 
                           alt={`Update image ${imageIndex + 1}`}
+                          width={64}
+                          height={64}
                           className="w-16 h-16 rounded-xs object-cover flex-shrink-0"
                           style={{ 
                             transform: `rotate(${imageIndex === 0 ? '2deg' : imageIndex === 1 ? '-1deg' : '1deg'})`,
