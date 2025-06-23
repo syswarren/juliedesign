@@ -1,16 +1,10 @@
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import FloatingMenu from '@/components/FloatingMenu';
 import WorkExperience from '@/components/WorkExperience';
 import Links from '@/components/Links';
+import AboutFooter from '@/components/AboutFooter';
 import { workExperiences } from '@/data/workExperienceData';
 import { links } from '@/data/linksData';
-
-// Dynamically import AboutFooter to improve initial page load
-const AboutFooter = dynamic(() => import('@/components/AboutFooter'), {
-  loading: () => <div className="w-full bg-true-gray-800 pt-24 pb-[100px] relative" />,
-  ssr: true
-});
 
 export const metadata: Metadata = {
   title: 'About — Julie Chabin',

@@ -68,13 +68,13 @@ export default function CompanyLogos() {
           // For logos with both width and height, or only height
           return (
             <Image
-              key={index}
-              alt={logo.alt}
-              src={logo.src}
+            key={index}
+            alt={logo.alt}
+            src={logo.src}
               width={logo.imgWidth}
               height={logo.imgHeight}
-              className={`${logo.height || ''} ${logo.width} object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 brightness-0 invert`}
-            />
+            className={`${logo.height || ''} ${logo.width} object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 brightness-0 invert`}
+          />
           );
         })}
       </div>
