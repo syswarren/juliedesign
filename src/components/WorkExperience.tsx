@@ -29,6 +29,8 @@ export default function WorkExperience({ experiences }: WorkExperienceProps) {
                 alt={`${experience.company} logo`}
                 width={48}
                 height={48}
+                priority={index < 2}
+                sizes="48px"
                 className="w-12 h-12 rounded-xs object-cover"
               />
             </div>

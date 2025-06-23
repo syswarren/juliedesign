@@ -26,7 +26,7 @@ function getRelativeDate(dateString: string): string {
   }
 }
 
-export default function UpdatesPage() {
+export default function NowPage() {
   // Filter out future posts
   const currentDate = new Date();
   const filteredUpdates = updates.filter(update => {
@@ -90,6 +90,7 @@ export default function UpdatesPage() {
                             src={item.src} 
                             alt={item.alt || `Update image ${itemIndex + 1}`}
                             fill
+                            sizes="(max-width: 640px) 100vw, 600px"
                             className="rounded-lg object-cover"
                           />
                         </div>

@@ -3,7 +3,7 @@ import GradientBlur from '@/components/GradientBlur';
 import Updates from '@/components/Updates';
 import WorkPrinciples from '@/components/WorkPrinciples';
 import FloatingMenu from '@/components/FloatingMenu';
-import HiddenFooter from '@/components/HiddenFooter';
+import RevealFooter from '@/components/RevealFooter';
 import CompanyLogos from '@/components/CompanyLogos';
 import { galleryItems } from '@/data/galleryData';
 import { updates } from '@/data/updatesData';
@@ -67,8 +67,8 @@ export default function Home() {
         </section>
       </div>
 
-      {/* Hidden Footer with Video Background */}
-      <HiddenFooter />
+      {/* Reveal Footer with Video Background */}
+      <RevealFooter />
 
       {/* Progressive Blur Effect */}
       <GradientBlur />

@@ -17,7 +17,7 @@ interface InfiniteGalleryProps {
 
 export default function InfiniteGallery({ 
   items, 
-  height = "200px", 
+  height = "600px", 
   animationDuration = 20 
 }: InfiniteGalleryProps) {
   const [isDragging, setIsDragging] = useState(false);
@@ -81,6 +81,7 @@ export default function InfiniteGallery({
         className="carousel"
         style={{ 
           height,
+          maxHeight: '680px',
           '--bg-clr': '#1a1a1a',
           '--animation-duration': `${animationDuration}s`
         } as React.CSSProperties}
@@ -103,7 +104,7 @@ export default function InfiniteGallery({
                 sizes="60vh"
                 priority={index === 0}
                 className="gallery-image"
-                style={{ height: '60vh', width: 'auto' }}
+                style={{ height: '60vh', maxHeight: '680px', width: 'auto' }}
                 onError={() => {
                   console.error('Failed to load image:', item.src);
                 }}
@@ -125,7 +126,7 @@ export default function InfiniteGallery({
                 sizes="60vh"
                 priority={index === 0}
                 className="gallery-image"
-                style={{ height: '60vh', width: 'auto' }}
+                style={{ height: '60vh', maxHeight: '680px', width: 'auto' }}
                 onError={() => {
                   console.error('Failed to load image:', item.src);
                 }}

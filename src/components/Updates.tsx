@@ -57,7 +57,7 @@ export default function Updates({ updates }: UpdatesProps) {
           return (
             <Link 
               key={index} 
-              href={`/updates#${update.id}`}
+              href={`/now#${update.id}`}
               className="block py-2 pb-6 last:border-b-0 rounded-lg px-2 -mx-2"
               style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}
             >
@@ -76,20 +76,29 @@ export default function Updates({ updates }: UpdatesProps) {
                   {/* Images */}
                   {images.length > 0 && (
                     <div className="flex gap-3 mb-2 mt-3 flex-wrap">
-                      {images.slice(0, 3).map((image, imageIndex) => (
-                        <Image 
-                          key={imageIndex}
-                          src={image} 
-                          alt={`Update image ${imageIndex + 1}`}
-                          width={64}
-                          height={64}
-                          className="w-16 h-16 rounded-xs object-cover flex-shrink-0"
-                          style={{ 
-                            transform: `rotate(${imageIndex === 0 ? '2deg' : imageIndex === 1 ? '-1deg' : '1deg'})`,
-                            flexShrink: 0
-                          }}
-                        />
-                      ))}
+                      {images.slice(0, 3).map((image, imageIndex) => {
+                        const rotations = ['2deg', '-1deg', '1deg'];
+                        const currentRotation = rotations[imageIndex] || '0deg';
+                        
+                        return (
+                          <div
+                            key={imageIndex}
+                            className="cursor-pointer transition-transform duration-300 ease-in-out"
+                            style={{ transform: `rotate(${currentRotation})` }}
+                            onMouseEnter={(e) => e.currentTarget.style.transform = 'rotate(0deg) scale(1.02)'}
+                            onMouseLeave={(e) => e.currentTarget.style.transform = `rotate(${currentRotation})`}
+                          >
+                            <Image 
+                              src={image} 
+                              alt={`Update image ${imageIndex + 1}`}
+                              width={64}
+                              height={64}
+                              className="w-16 h-16 rounded-xs object-cover flex-shrink-0"
+                              style={{ flexShrink: 0 }}
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
@@ -108,7 +117,7 @@ export default function Updates({ updates }: UpdatesProps) {
       
       {/* View more link */}
       <div className="mt-6 text-center">
-        <Link href="/updates" className="text-true-gray-400 page-text hover:text-white transition-colors">
+        <Link href="/now" className="text-true-gray-400 page-text hover:text-white transition-colors">
           View changelog →
         </Link>
       </div>

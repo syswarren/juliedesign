@@ -62,9 +62,9 @@ export default function FloatingMenu() {
         </li>
         <li>
           <Link 
-            href="/updates" 
+            href="/now" 
             className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
-              isActive('/updates') ? 'text-white dotted-underline' : ''
+              isActive('/now') ? 'text-white dotted-underline' : ''
             }`}
             style={{ 
               textShadow: '2px 2px 4px rgba(0, 0, 0, 1)', 
