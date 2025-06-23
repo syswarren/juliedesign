@@ -619,15 +619,15 @@ body {
 }
 
 .markdown-content .hljs-keyword {
-  color: #f87171 !important;
+  color: #fe9fc6 !important;
 }
 
 .markdown-content .hljs-string {
-  color: #86efac !important;
+  color: #86edef !important;
 }
 
 .markdown-content .hljs-comment {
-  color: #9ca3af !important;
+  color: #83a6e2 !important;
   font-style: italic;
 }
 
@@ -636,7 +636,7 @@ body {
 }
 
 .markdown-content .hljs-number {
-  color: #fbbf24 !important;
+  color: #fffc5f !important;
 }
 
 .markdown-content .hljs-operator {

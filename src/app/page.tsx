@@ -23,7 +23,7 @@ export default function Home() {
         {/* Header */}
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
           <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Julie Chabin</h1>
-          <p className="text-white" style={{ fontSize: '20px' }}>One head, several hats. Mostly design.</p>
+          <p className="text-true-gray-300" style={{ fontSize: '20px' }}>One head, several hats. Mostly design.</p>
         </header>
 
         {/* Intro */}

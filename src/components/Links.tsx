@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MoveUpRight } from 'lucide-react';
 
 interface LinkItem {
   title: string;
@@ -53,8 +54,8 @@ export default function Links({ links }: LinksProps) {
                   <p className="text-true-gray-400 page-text text-sm">
                     {link.date}
                   </p>
-                  <div className="text-true-gray-500 text-xs mt-1 group-hover:text-true-gray-400 transition-colors">
-                    ↗
+                  <div className="text-true-gray-500 mt-1 group-hover:text-true-gray-400 transition-colors flex justify-end">
+                    <MoveUpRight size={16} />
                   </div>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { MoveUpRight } from 'lucide-react';
 
 interface WorkExperienceItem {
   logo: string;
@@ -57,8 +58,14 @@ export default function WorkExperience({ experiences }: WorkExperienceProps) {
       
       {/* View more link */}
       <div className="mt-6 text-center">
-        <a href="/about" className="text-true-gray-400 page-text hover:text-white transition-colors">
-          View more →
+        <a 
+          href="https://linkedin.com/in/juliechabin" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-true-gray-400 page-text hover:text-white transition-colors inline-flex items-center gap-1 group"
+        >
+          View more on LinkedIn
+          <MoveUpRight size={16} className="group-hover:text-white transition-colors" />
         </a>
       </div>
     </div>

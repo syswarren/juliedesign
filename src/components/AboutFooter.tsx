@@ -92,6 +92,13 @@ export default function AboutFooter() {
           </div>
         </div>
       </div>
+      
+      {/* Styled footer message */}
+      <div className="mt-16 pt-8">
+        <p className="text-true-gray-400 text-xl text-center" style={{ fontFamily: '"Jacquard 12", serif', fontWeight: 'normal', textShadow: '2px -2px #000000' }}>
+          Thanks for stopping by!
+        </p>
+      </div>
     </footer>
   );
 } 

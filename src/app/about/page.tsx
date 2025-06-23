@@ -73,7 +73,7 @@ export default function AboutPage() {
 
         {/* Links */}
         <section className="w-full pt-12 pb-16 flex flex-col">
-          <h2 className="font-semibold mb-4 text-left text-white page-text">Interviews & posts</h2>
+          <h2 className="font-semibold mb-4 text-left text-white page-text">Dive into my brain</h2>
           <Links links={links} />
         </section>
       </div>
