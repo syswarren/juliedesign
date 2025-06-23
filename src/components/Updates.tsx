@@ -37,6 +37,28 @@ function getRelativeDate(dateString: string): string {
   }
 }
 
+// Utility function to extract preview text from markdown content
+function getPreviewText(content: (string | { type: 'image'; src: string; alt?: string })[]): string {
+  const textContent = content
+    .filter(item => typeof item === 'string')
+    .join('\n');
+  
+  // Remove markdown formatting for preview
+  const cleanText = textContent
+    .replace(/^#+\s+/gm, '') // Remove headers
+    .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
+    .replace(/\*(.*?)\*/g, '$1') // Remove italic
+    .replace(/`(.*?)`/g, '$1') // Remove inline code
+    .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+    .replace(/^\s*[-*+]\s+/gm, '') // Remove list markers
+    .replace(/^\s*\d+\.\s+/gm, '') // Remove numbered list markers
+    .trim();
+  
+  // Get first paragraph
+  const firstParagraph = cleanText.split('\n\n')[0];
+  return firstParagraph.length > 150 ? firstParagraph.substring(0, 150) + '...' : firstParagraph;
+}
+
 export default function Updates({ updates }: UpdatesProps) {
   // Filter out future posts
   const currentDate = new Date();
@@ -53,6 +75,9 @@ export default function Updates({ updates }: UpdatesProps) {
           const images = update.content
             .filter(item => typeof item === 'object' && item.type === 'image')
             .map(item => (item as { type: 'image'; src: string; alt?: string }).src);
+
+          // Get preview text
+          const previewText = getPreviewText(update.content);
 
           return (
             <Link 
@@ -71,6 +96,11 @@ export default function Updates({ updates }: UpdatesProps) {
                   {/* Subtitle */}
                   <p className="text-true-gray-300 page-text mb-2">
                     {update.subtitle}
+                  </p>
+                  
+                  {/* Preview Text */}
+                  <p className="text-true-gray-400 page-text text-sm mb-2 line-clamp-2">
+                    {previewText}
                   </p>
                   
                   {/* Images */}

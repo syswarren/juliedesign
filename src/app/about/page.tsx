@@ -3,6 +3,7 @@ import FloatingMenu from '@/components/FloatingMenu';
 import WorkExperience from '@/components/WorkExperience';
 import Links from '@/components/Links';
 import AboutFooter from '@/components/AboutFooter';
+import GradientBlur from '@/components/GradientBlur';
 import { workExperiences } from '@/data/workExperienceData';
 import { links } from '@/data/linksData';
 
@@ -79,6 +80,9 @@ export default function AboutPage() {
 
       {/* Custom Footer */}
       <AboutFooter />
+
+      {/* Progressive Blur Effect */}
+      <GradientBlur />
     </div>
   );
 } 

@@ -1,6 +1,7 @@
 'use client';
 
 import FloatingMenu from '@/components/FloatingMenu';
+import MarkdownContent from '@/components/MarkdownContent';
 import { updates } from '@/data/updatesData';
 import Image from 'next/image';
 
@@ -76,28 +77,38 @@ export default function NowPage() {
               {/* Content */}
               <div className="prose prose-invert max-w-none">
                 <div className="space-y-4">
-                  {update.content.map((item, itemIndex) => {
-                    if (typeof item === 'string') {
-                      return (
-                        <div key={itemIndex} className="whitespace-pre-wrap text-true-gray-200 paragraph-text leading-relaxed">
-                          {item}
-                        </div>
-                      );
-                    } else if (item.type === 'image') {
-                      return (
-                        <div key={itemIndex} className="relative aspect-video">
-                          <Image 
-                            src={item.src} 
-                            alt={item.alt || `Update image ${itemIndex + 1}`}
-                            fill
-                            sizes="(max-width: 640px) 100vw, 600px"
-                            className="rounded-lg object-cover"
-                          />
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                  {(() => {
+                    // Get the markdown content (should be a single string now)
+                    const textContent = update.content.find(item => typeof item === 'string') as string;
+                    
+                    if (!textContent) return null;
+                    
+                    // Render markdown content
+                    const markdownElement = (
+                      <MarkdownContent key="markdown" content={textContent} />
+                    );
+                    
+                    // Render images if any
+                    const elements = [markdownElement];
+                    update.content.forEach((item, itemIndex) => {
+                      if (typeof item === 'object' && item.type === 'image') {
+                        const imageItem = item as { type: 'image'; src: string; alt?: string };
+                        elements.push(
+                          <div key={`image-${itemIndex}`} className="relative aspect-video">
+                            <Image 
+                              src={imageItem.src} 
+                              alt={imageItem.alt || `Update image ${itemIndex + 1}`}
+                              fill
+                              sizes="(max-width: 640px) 100vw, 600px"
+                              className="rounded-lg object-cover"
+                            />
+                          </div>
+                        );
+                      }
+                    });
+                    
+                    return elements;
+                  })()}
                 </div>
               </div>
             </article>
