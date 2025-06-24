@@ -70,15 +70,38 @@ body {
 
 /* Distort effect for floating menu */
 .distort {
+  /* Fallback for browsers that don't support backdrop-filter */
+  background-color: rgba(0, 0, 0, 0.39);
+  
+  /* Multiple backdrop-filter declarations for better browser support */
   backdrop-filter: blur(10px) contrast(1.1) saturate(180%) brightness(0.8);
   -webkit-backdrop-filter: blur(10px) contrast(1.1) saturate(180%) brightness(0.8);
-  background-color: rgba(0, 0, 0, 0.39);
-  z-index: 1000;
-  will-change: backdrop-filter;
+  -moz-backdrop-filter: blur(10px) contrast(1.1) saturate(180%) brightness(0.8);
+  
+  /* Force hardware acceleration */
   transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  
+  /* Additional properties for better rendering */
+  z-index: 1000;
+  will-change: backdrop-filter, transform;
+  
+  /* Background properties */
   background-size: 100% 100%;
   background-position: 0px 0px,0px 0px;
   background-image: radial-gradient(67% 10% at var(--gradient-x, 82%) var(--gradient-y, 0%), #E5592282 0%, #EDE44C7A 17%, #6DECC778 39%, #5AB7EF7D 58%, #8E58B763 75%, #5A337D33 88%, #00000000 100%),radial-gradient(75% 75% at 21% 29%, #00000025 0%, #00000027 100%);
+  
+  /* Ensure backdrop-filter is not disabled */
+  isolation: isolate;
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(1px)) {
+  .distort {
+    background-color: rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
 }
 
 /* Dotted underline for active menu links */
