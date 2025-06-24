@@ -4,7 +4,6 @@ import { postsQuery, postBySlugQuery } from './queries'
 export interface Post {
   _id: string
   title: string
-  subtitle?: string
   slug: string
   publishedAt: string
   author?: string

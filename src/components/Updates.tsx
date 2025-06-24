@@ -98,13 +98,6 @@ export default function Updates({ posts }: UpdatesProps) {
                     {post.title}
                   </h3>
                   
-                  {/* Subtitle */}
-                  {post.subtitle && (
-                    <p className="text-true-gray-300 page-text mb-2">
-                      {post.subtitle}
-                    </p>
-                  )}
-                  
                   {/* Preview Text */}
                   <p className="text-true-gray-400 page-text text-sm mb-2 line-clamp-2">
                     {previewText}

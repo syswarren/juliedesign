@@ -3,6 +3,21 @@
 import { PortableText as PortableTextComponent } from '@portabletext/react'
 import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
+import { useEffect } from 'react'
+import Prism from 'prismjs'
+
+// Import core languages statically
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-typescript'
+import 'prismjs/components/prism-jsx'
+import 'prismjs/components/prism-tsx'
+import 'prismjs/components/prism-markup'
+import 'prismjs/components/prism-css'
+import 'prismjs/components/prism-json'
+import 'prismjs/components/prism-markdown'
+import 'prismjs/components/prism-python'
+import 'prismjs/components/prism-bash'
+import 'prismjs/components/prism-sql'
 
 const components = {
   types: {
@@ -19,6 +34,40 @@ const components = {
             sizes="(max-width: 640px) 100vw, 600px"
             className="rounded-lg object-cover"
           />
+        </div>
+      )
+    },
+    codeBlock: ({ value }: any) => {
+      const { code, language, filename } = value
+      
+      useEffect(() => {
+        // Simple highlighting without dynamic imports
+        try {
+          Prism.highlightAll()
+        } catch (error) {
+          console.warn('Prism.js highlighting failed:', error)
+        }
+      }, [code, language])
+      
+      return (
+        <div className="my-6">
+          {filename && (
+            <div className="bg-gray-800 text-gray-300 px-4 py-2 text-sm font-mono border-b border-gray-700 rounded-t-lg">
+              {filename}
+            </div>
+          )}
+          <pre className={`bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto ${
+            filename ? 'rounded-t-none' : ''
+          }`}>
+            <code className={`language-${language || 'text'}`}>
+              {code}
+            </code>
+          </pre>
+          {language && language !== 'text' && (
+            <div className="text-xs text-gray-500 mt-2 font-mono">
+              {language}
+            </div>
+          )}
         </div>
       )
     },

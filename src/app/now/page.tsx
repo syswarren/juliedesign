@@ -71,6 +71,26 @@ export default function NowPage() {
     fetchPosts();
   }, []);
 
+  // Handle anchor links when page loads
+  useEffect(() => {
+    if (!loading && posts.length > 0) {
+      const hash = window.location.hash;
+      if (hash) {
+        const targetId = hash.substring(1); // Remove the #
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          // Add a small delay to ensure the page is fully rendered
+          setTimeout(() => {
+            targetElement.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }, 100);
+        }
+      }
+    }
+  }, [loading, posts]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
@@ -138,13 +158,6 @@ export default function NowPage() {
                 <h2 className="font-semibold text-white text-xl mb-3">
                   {post.title}
                 </h2>
-
-                {/* Subtitle */}
-                {post.subtitle && (
-                  <p className="text-true-gray-300 page-text mb-6">
-                    {post.subtitle}
-                  </p>
-                )}
 
                 {/* Main Image */}
                 {post.mainImage && (

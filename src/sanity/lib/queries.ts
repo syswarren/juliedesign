@@ -4,7 +4,6 @@ export const postsQuery = groq`
   *[_type == "post"] | order(publishedAt desc) {
     _id,
     title,
-    subtitle,
     "slug": slug.current,
     publishedAt,
     "author": author->name,
@@ -19,7 +18,6 @@ export const postBySlugQuery = groq`
   *[_type == "post" && slug.current == $slug][0] {
     _id,
     title,
-    subtitle,
     "slug": slug.current,
     publishedAt,
     "author": author->name,

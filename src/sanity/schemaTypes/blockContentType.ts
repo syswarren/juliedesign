@@ -1,5 +1,5 @@
 import {defineType, defineArrayMember} from 'sanity'
-import {ImageIcon} from '@sanity/icons'
+import {ImageIcon, CodeIcon} from '@sanity/icons'
 
 /**
  * This is the schema type for block content used in the post document type
@@ -71,6 +71,65 @@ export const blockContentType = defineType({
           title: 'Alternative Text',
         }
       ]
+    }),
+    // Code block for syntax highlighting
+    defineArrayMember({
+      type: 'object',
+      name: 'codeBlock',
+      icon: CodeIcon,
+      title: 'Code Block',
+      fields: [
+        {
+          name: 'code',
+          type: 'text',
+          title: 'Code',
+          description: 'Your code snippet',
+          rows: 10,
+        },
+        {
+          name: 'filename',
+          type: 'string',
+          title: 'Filename (optional)',
+          description: 'e.g., app.js, styles.css, etc.',
+        },
+        {
+          name: 'language',
+          type: 'string',
+          title: 'Language',
+          description: 'Programming language for syntax highlighting',
+          options: {
+            list: [
+              {title: 'JavaScript', value: 'javascript'},
+              {title: 'TypeScript', value: 'typescript'},
+              {title: 'JSX', value: 'jsx'},
+              {title: 'TSX', value: 'tsx'},
+              {title: 'HTML', value: 'markup'},
+              {title: 'CSS', value: 'css'},
+              {title: 'JSON', value: 'json'},
+              {title: 'Markdown', value: 'markdown'},
+              {title: 'Python', value: 'python'},
+              {title: 'Bash', value: 'bash'},
+              {title: 'SQL', value: 'sql'},
+              {title: 'Plain Text', value: 'text'},
+            ],
+          },
+        },
+      ],
+      preview: {
+        select: {
+          title: 'filename',
+          subtitle: 'language',
+          code: 'code',
+        },
+        prepare(selection) {
+          const {title, subtitle, code} = selection
+          return {
+            title: title || 'Code Block',
+            subtitle: subtitle ? `${subtitle} code` : 'Code',
+            media: CodeIcon,
+          }
+        },
+      },
     }),
   ],
 })
