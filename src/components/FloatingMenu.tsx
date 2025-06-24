@@ -81,7 +81,7 @@ export default function FloatingMenu() {
         <li>
           <button
             onClick={openModal}
-            className="text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap"
+            className="text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap cursor-pointer"
           >
             Say hi
           </button>

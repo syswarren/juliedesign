@@ -1,6 +1,6 @@
 import InfiniteGallery from '@/components/InfiniteGallery';
 import GradientBlur from '@/components/GradientBlur';
-import Updates from '@/components/Updates';
+import ClientUpdates from '@/components/ClientUpdates';
 import WorkPrinciples from '@/components/WorkPrinciples';
 import FloatingMenu from '@/components/FloatingMenu';
 import RevealFooter from '@/components/RevealFooter';
@@ -9,33 +9,7 @@ import SayHiButton from '@/components/SayHiButton';
 import { galleryItems } from '@/data/galleryData';
 import { workPrinciples } from '@/data/workPrinciplesData';
 
-export default async function Home() {
-  // Temporarily disable Sanity to test modal functionality
-  // TODO: Fix Sanity RxJS compatibility issue
-  let posts: any[] = [];
-  
-  // try {
-  //   const { getPosts } = await import('@/sanity/lib/posts');
-  //   posts = await getPosts();
-  // } catch (error) {
-  //   console.error('Error fetching posts:', error);
-  //   // Continue without posts
-  // }
-
-  // Get the 3 most recent posts, properly sorted by date
-  const currentDate = new Date();
-  const recentPosts = posts
-    .filter(post => {
-      const postDate = new Date(post.publishedAt);
-      return postDate <= currentDate;
-    })
-    .sort((a, b) => {
-      const dateA = new Date(a.publishedAt);
-      const dateB = new Date(b.publishedAt);
-      return dateB.getTime() - dateA.getTime(); // Most recent first
-    })
-    .slice(0, 3);
-
+export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
       {/* Floating Menu */}
@@ -83,11 +57,8 @@ export default async function Home() {
           <WorkPrinciples principles={workPrinciples} />
         </section>
 
-        {/* Updates */}
-        <section className="w-full py-12 flex flex-col">
-          <h2 className="font-semibold mb-4 text-left text-white page-text">Now</h2>
-          <Updates posts={recentPosts} />
-        </section>
+        {/* Updates - Client-side rendered to avoid SSR issues */}
+        <ClientUpdates />
       </div>
 
       {/* Reveal Footer with Video Background */}

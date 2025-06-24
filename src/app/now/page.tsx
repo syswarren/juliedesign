@@ -1,10 +1,10 @@
 'use client';
 
 import FloatingMenu from '@/components/FloatingMenu';
-import MarkdownContent from '@/components/MarkdownContent';
-import { updates } from '@/data/updatesData';
+import PortableText from '@/components/PortableText';
+import { getPosts, Post } from '@/sanity/lib/posts';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // Utility function to convert date to relative format
 function getRelativeDate(dateString: string): string {
@@ -28,45 +28,78 @@ function getRelativeDate(dateString: string): string {
   }
 }
 
-// Component for truncated markdown content
-function TruncatedMarkdownContent({ content, maxLength = 800 }: { content: string; maxLength?: number }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  
-  // Simple text truncation (you might want to implement more sophisticated markdown truncation)
-  const truncatedContent = content.length > maxLength && !isExpanded 
-    ? content.substring(0, maxLength) + '...'
-    : content;
-
+// Component for displaying full content
+function PostContent({ post }: { post: Post }) {
   return (
     <div>
-      <MarkdownContent content={truncatedContent} />
-      {content.length > maxLength && (
-        <div className="flex justify-center mt-4">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full px-4 py-2 btn-custom page-text rounded-md text-sm transition-all duration-300 ease-in-out"
-          >
-            {isExpanded ? 'Close' : 'Read more'}
-          </button>
-        </div>
-      )}
+      <PortableText value={post.body} />
     </div>
   );
 }
 
 export default function NowPage() {
-  // Filter out future posts and sort by date (most recent first)
-  const currentDate = new Date();
-  const filteredUpdates = updates
-    .filter(update => {
-      const updateDate = new Date(update.date);
-      return updateDate <= currentDate;
-    })
-    .sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-      return dateB.getTime() - dateA.getTime(); // Most recent first
-    });
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const fetchedPosts = await getPosts();
+        // Filter out future posts and sort by date (most recent first)
+        const currentDate = new Date();
+        const filteredPosts = fetchedPosts
+          .filter(post => {
+            const postDate = new Date(post.publishedAt);
+            return postDate <= currentDate;
+          })
+          .sort((a, b) => {
+            const dateA = new Date(a.publishedAt);
+            const dateB = new Date(b.publishedAt);
+            return dateB.getTime() - dateA.getTime(); // Most recent first
+          });
+        
+        setPosts(filteredPosts);
+      } catch (err) {
+        setError('Failed to load posts');
+        console.error('Error fetching posts:', err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
+        <FloatingMenu />
+        <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
+          <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
+            <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+            <p className="text-true-gray-300 mb-10" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
+          </header>
+          <div className="text-center text-true-gray-400">Loading posts...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
+        <FloatingMenu />
+        <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
+          <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
+            <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+            <p className="text-true-gray-300 mb-10" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
+          </header>
+          <div className="text-center text-red-400">{error}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
@@ -81,20 +114,20 @@ export default function NowPage() {
         </header>
       </div>
 
-      {/* Updates List */}
+      {/* Posts List */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         <div className="space-y-40">
-          {filteredUpdates.map((update) => (
+          {posts.map((post) => (
             <article 
-              key={update.id} 
-              id={update.id}
+              key={post._id} 
+              id={post.slug}
               className="scroll-mt-20"
             >
               {/* Date with decorative lines */}
               <div className="flex items-center justify-center mb-8">
                 <div className="flex-1 h-px bg-white/10"></div>
                 <time className="px-4 text-true-gray-400 page-text text-sm font-medium">
-                  {getRelativeDate(update.date)}
+                  {getRelativeDate(post.publishedAt)}
                 </time>
                 <div className="flex-1 h-px bg-white/10"></div>
               </div>
@@ -102,54 +135,48 @@ export default function NowPage() {
               {/* Content */}
               <div>
                 {/* Title */}
-                <h2 className="font-semibold text-white page-text text-lg mb-3">
-                  {update.title}
+                <h2 className="font-semibold text-white text-xl mb-3">
+                  {post.title}
                 </h2>
 
                 {/* Subtitle */}
-                <p className="text-true-gray-300 page-text mb-6">
-                  {update.subtitle}
-                </p>
+                {post.subtitle && (
+                  <p className="text-true-gray-300 page-text mb-6">
+                    {post.subtitle}
+                  </p>
+                )}
+
+                {/* Main Image */}
+                {post.mainImage && (
+                  <div className="relative aspect-video mb-6">
+                    <Image 
+                      src={post.mainImage} 
+                      alt={post.mainImageAlt || post.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 600px"
+                      className="rounded-lg object-cover"
+                    />
+                  </div>
+                )}
 
                 {/* Content */}
                 <div className="prose prose-invert max-w-none">
-                  <div className="space-y-4">
-                    {(() => {
-                      // Combine all string content into a single markdown string
-                      const textContent = update.content
-                        .filter(item => typeof item === 'string')
-                        .join('\n\n');
-                      
-                      if (!textContent) return null;
-                      
-                      // Render markdown content with truncation for long posts
-                      const markdownElement = (
-                        <TruncatedMarkdownContent key="markdown" content={textContent} />
-                      );
-                      
-                      // Render images if any
-                      const elements = [markdownElement];
-                      update.content.forEach((item, itemIndex) => {
-                        if (typeof item === 'object' && item.type === 'image') {
-                          const imageItem = item as { type: 'image'; src: string; alt?: string };
-                          elements.push(
-                            <div key={`image-${itemIndex}`} className="relative aspect-video">
-                              <Image 
-                                src={imageItem.src} 
-                                alt={imageItem.alt || `Update image ${itemIndex + 1}`}
-                                fill
-                                sizes="(max-width: 640px) 100vw, 600px"
-                                className="rounded-lg object-cover"
-                              />
-                            </div>
-                          );
-                        }
-                      });
-                      
-                      return elements;
-                    })()}
-                  </div>
+                  <PostContent post={post} />
                 </div>
+
+                {/* Categories */}
+                {post.categories && post.categories.length > 0 && (
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {post.categories.map((category) => (
+                      <span
+                        key={category}
+                        className="px-3 py-1 bg-white/10 text-true-gray-300 text-xs rounded-full"
+                      >
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -158,7 +185,7 @@ export default function NowPage() {
         {/* Footer */}
         <div className="mt-16 pt-8 pb-24 border-t border-white/10">
           <p className="text-true-gray-400 text-xl text-center" style={{ fontFamily: '"Jacquard 12", serif', fontWeight: 'normal', textShadow: '2px -2px #000000' }}>
-            That's all for now!
+            That&apos;s all for now!
           </p>
         </div>
       </div>
