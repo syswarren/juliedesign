@@ -38,7 +38,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       const timeout = setTimeout(() => setShow(false), 200);
       return () => clearTimeout(timeout);
     }
-  }, [isOpen]);
+  }, [isOpen, show]);
 
   // Opening transition: trigger after mount
   useLayoutEffect(() => {
@@ -150,7 +150,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
           {/* Message */}
           <div className="mt-8 pt-6 border-t border-white/10">
             <p className="text-true-gray-300 text-sm">
-            While I’m currently fully booked, I’m always up for a good conversation about design, startups, or building something useful.
+              While I&apos;m currently fully booked, I&apos;m always up for a good conversation about design, startups, or building something useful.
             </p>
           </div>
         </div>
