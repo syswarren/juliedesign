@@ -73,14 +73,14 @@ body {
 /* stylelint-disable */
 .distort {
   /* Fallback for browsers that don't support backdrop-filter */
-  background-color: rgba(0, 0, 0, 0.39) !important;
+  background-color: rgba(26, 26, 26, 0.473) !important;
   
   /* Multiple backdrop-filter declarations for better browser support */
   /* Using !important to prevent CSS optimizers from removing these */
   /* CRITICAL: Do not remove backdrop-filter properties - required for production */
-  backdrop-filter: blur(10px) contrast(1.1) saturate(180%) brightness(0.8) !important;
-  -webkit-backdrop-filter: blur(10px) contrast(1.1) saturate(180%) brightness(0.8) !important;
-  -moz-backdrop-filter: blur(10px) contrast(1.1) saturate(180%) brightness(0.8) !important;
+  backdrop-filter: blur(6px) contrast(1) saturate(180%) brightness(1) !important;
+  -webkit-backdrop-filter: blur(6px) contrast(1) saturate(180%) brightness(1) !important;
+  -moz-backdrop-filter: blur(6px) contrast(1) saturate(180%) brightness(1) !important;
   
   /* Force hardware acceleration */
   transform: translateZ(0) !important;
