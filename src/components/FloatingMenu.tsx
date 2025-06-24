@@ -41,7 +41,7 @@ export default function FloatingMenu() {
   return (
     <nav 
       ref={menuRef}
-      className="distort fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 border-b border-white/20 shadow-xl rounded-full px-6 py-3 space-x-6 flex items-center"
+      className="distort backdrop-blur-[10px] backdrop-contrast-[1.1] backdrop-saturate-[180%] backdrop-brightness-[0.8] fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 border-b border-white/20 shadow-xl rounded-full px-6 py-3 space-x-6 flex items-center"
       style={{
         '--gradient-x': '82%',
         '--gradient-y': '0%'
