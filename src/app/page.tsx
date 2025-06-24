@@ -5,21 +5,33 @@ import WorkPrinciples from '@/components/WorkPrinciples';
 import FloatingMenu from '@/components/FloatingMenu';
 import RevealFooter from '@/components/RevealFooter';
 import CompanyLogos from '@/components/CompanyLogos';
+import SayHiButton from '@/components/SayHiButton';
 import { galleryItems } from '@/data/galleryData';
-import { updates } from '@/data/updatesData';
 import { workPrinciples } from '@/data/workPrinciplesData';
 
-export default function Home() {
-  // Get the 3 most recent updates, properly sorted by date
+export default async function Home() {
+  // Temporarily disable Sanity to test modal functionality
+  // TODO: Fix Sanity RxJS compatibility issue
+  let posts: any[] = [];
+  
+  // try {
+  //   const { getPosts } = await import('@/sanity/lib/posts');
+  //   posts = await getPosts();
+  // } catch (error) {
+  //   console.error('Error fetching posts:', error);
+  //   // Continue without posts
+  // }
+
+  // Get the 3 most recent posts, properly sorted by date
   const currentDate = new Date();
-  const recentUpdates = updates
-    .filter(update => {
-      const updateDate = new Date(update.date);
-      return updateDate <= currentDate;
+  const recentPosts = posts
+    .filter(post => {
+      const postDate = new Date(post.publishedAt);
+      return postDate <= currentDate;
     })
     .sort((a, b) => {
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
+      const dateA = new Date(a.publishedAt);
+      const dateB = new Date(b.publishedAt);
       return dateB.getTime() - dateA.getTime(); // Most recent first
     })
     .slice(0, 3);
@@ -48,7 +60,7 @@ export default function Home() {
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
             Now I work with founders to shape their product&apos;s first version, raise funds, and get noticed. I also build my own tools. It starts with curiosity, and always ends in learning.
           </p>
-          <a href="#contact" className="px-6 py-2 mt-4 btn-custom w-fit page-text rounded-full">Say hi</a>
+          <SayHiButton className="px-6 py-2 mt-4 btn-custom w-fit page-text rounded-full" />
         </section>
       </div>
 
@@ -74,7 +86,7 @@ export default function Home() {
         {/* Updates */}
         <section className="w-full py-12 flex flex-col">
           <h2 className="font-semibold mb-4 text-left text-white page-text">Now</h2>
-          <Updates updates={recentUpdates} />
+          <Updates posts={recentPosts} />
         </section>
       </div>
 

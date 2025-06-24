@@ -3,10 +3,12 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useContactModal } from './ContactModalContext';
 
 export default function FloatingMenu() {
   const menuRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
+  const { openModal } = useContactModal();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,14 +79,12 @@ export default function FloatingMenu() {
           </Link>
         </li>
         <li>
-          <Link 
-            href="/contact" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
-              isActive('/contact') ? 'text-white dotted-underline' : ''
-            }`}
+          <button
+            onClick={openModal}
+            className="text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap"
           >
             Say hi
-          </Link>
+          </button>
         </li>
       </ul>
     </nav>
