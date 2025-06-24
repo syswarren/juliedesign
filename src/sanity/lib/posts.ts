@@ -15,9 +15,17 @@ export interface Post {
 }
 
 export async function getPosts(): Promise<Post[]> {
+  if (!client) {
+    console.warn('Sanity client not configured, returning empty posts array')
+    return []
+  }
   return await client.fetch(postsQuery)
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
+  if (!client) {
+    console.warn('Sanity client not configured, returning null')
+    return null
+  }
   return await client.fetch(postBySlugQuery, { slug })
 } 
