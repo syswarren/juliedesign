@@ -44,12 +44,20 @@ export default function CompanyLogos() {
       width: "w-16",
       imgWidth: 64,
       imgHeight: 36
+    },
+    {
+      name: "API Video",
+      src: "/company-logos/cloud/apivideo_white_transparent.svg",
+      alt: "API Video",
+      width: "w-[130px]",
+      imgWidth: 130,
+      imgHeight: 40
     }
   ];
 
   return (
     <div className="py-12">
-      <div className="mx-auto flex flex-wrap justify-center items-center gap-8 max-w-lg sm:max-w-xl lg:max-w-none">
+      <div className="mx-auto flex flex-wrap justify-center items-center gap-x-8 gap-y-4 max-w-lg sm:max-w-xl lg:max-w-none">
         {logos.map((logo, index) => {
           // For logos with only width class, use fill with container
           if (logo.width && !logo.height) {

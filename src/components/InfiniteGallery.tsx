@@ -17,7 +17,7 @@ interface InfiniteGalleryProps {
 
 export default function InfiniteGallery({ 
   items, 
-  height = "600px", 
+  height = "200px", 
   animationDuration = 20 
 }: InfiniteGalleryProps) {
   const [isDragging, setIsDragging] = useState(false);

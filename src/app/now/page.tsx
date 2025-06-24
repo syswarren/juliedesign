@@ -29,7 +29,7 @@ function getRelativeDate(dateString: string): string {
 }
 
 // Component for truncated markdown content
-function TruncatedMarkdownContent({ content, maxLength = 300 }: { content: string; maxLength?: number }) {
+function TruncatedMarkdownContent({ content, maxLength = 800 }: { content: string; maxLength?: number }) {
   const [isExpanded, setIsExpanded] = useState(false);
   
   // Simple text truncation (you might want to implement more sophisticated markdown truncation)
@@ -44,9 +44,9 @@ function TruncatedMarkdownContent({ content, maxLength = 300 }: { content: strin
         <div className="flex justify-center mt-4">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full px-4 py-2 btn-custom page-text rounded-full text-sm transition-all duration-300 ease-in-out"
+            className="w-full px-4 py-2 btn-custom page-text rounded-md text-sm transition-all duration-300 ease-in-out"
           >
-            {isExpanded ? 'View less' : 'View more'}
+            {isExpanded ? 'Close' : 'Read more'}
           </button>
         </div>
       )}
@@ -55,12 +55,18 @@ function TruncatedMarkdownContent({ content, maxLength = 300 }: { content: strin
 }
 
 export default function NowPage() {
-  // Filter out future posts
+  // Filter out future posts and sort by date (most recent first)
   const currentDate = new Date();
-  const filteredUpdates = updates.filter(update => {
-    const updateDate = new Date(update.date);
-    return updateDate <= currentDate;
-  });
+  const filteredUpdates = updates
+    .filter(update => {
+      const updateDate = new Date(update.date);
+      return updateDate <= currentDate;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime(); // Most recent first
+    });
 
   return (
     <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
@@ -70,14 +76,14 @@ export default function NowPage() {
       {/* Header */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-          <h1 className="font-bold mb-1 text-white" style={{ fontSize: '20px' }}>Now</h1>
-          <p className="text-true-gray-300" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
+          <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+          <p className="text-true-gray-300 mb-10" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
         </header>
       </div>
 
       {/* Updates List */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
-        <div className="space-y-16">
+        <div className="space-y-40">
           {filteredUpdates.map((update) => (
             <article 
               key={update.id} 
@@ -109,12 +115,14 @@ export default function NowPage() {
                 <div className="prose prose-invert max-w-none">
                   <div className="space-y-4">
                     {(() => {
-                      // Get the markdown content (should be a single string now)
-                      const textContent = update.content.find(item => typeof item === 'string') as string;
+                      // Combine all string content into a single markdown string
+                      const textContent = update.content
+                        .filter(item => typeof item === 'string')
+                        .join('\n\n');
                       
                       if (!textContent) return null;
                       
-                      // Render truncated markdown content
+                      // Render markdown content with truncation for long posts
                       const markdownElement = (
                         <TruncatedMarkdownContent key="markdown" content={textContent} />
                       );

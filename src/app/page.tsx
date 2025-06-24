@@ -10,8 +10,19 @@ import { updates } from '@/data/updatesData';
 import { workPrinciples } from '@/data/workPrinciplesData';
 
 export default function Home() {
-  // Get the 3 most recent updates
-  const recentUpdates = updates.slice(0, 3);
+  // Get the 3 most recent updates, properly sorted by date
+  const currentDate = new Date();
+  const recentUpdates = updates
+    .filter(update => {
+      const updateDate = new Date(update.date);
+      return updateDate <= currentDate;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime(); // Most recent first
+    })
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
@@ -62,7 +73,7 @@ export default function Home() {
 
         {/* Updates */}
         <section className="w-full py-12 flex flex-col">
-          <h2 className="font-semibold mb-4 text-left text-white page-text">Updates</h2>
+          <h2 className="font-semibold mb-4 text-left text-white page-text">Now</h2>
           <Updates updates={recentUpdates} />
         </section>
       </div>

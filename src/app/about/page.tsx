@@ -30,7 +30,7 @@ export default function AboutPage() {
       {/* Header */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-          <h1 className="font-bold mb-1 text-white" style={{ fontSize: '20px' }}>Behind the work</h1>
+          <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Behind the work</h1>
           <p className="text-true-gray-300" style={{ fontSize: '20px' }}>15+ years of design, strategy, and getting things done.</p>
         </header>
       </div>

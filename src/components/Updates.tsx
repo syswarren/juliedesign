@@ -60,12 +60,18 @@ function getPreviewText(content: (string | { type: 'image'; src: string; alt?: s
 }
 
 export default function Updates({ updates }: UpdatesProps) {
-  // Filter out future posts
+  // Filter out future posts and sort by date (most recent first)
   const currentDate = new Date();
-  const filteredUpdates = updates.filter(update => {
-    const updateDate = new Date(update.date);
-    return updateDate <= currentDate;
-  });
+  const filteredUpdates = updates
+    .filter(update => {
+      const updateDate = new Date(update.date);
+      return updateDate <= currentDate;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateB.getTime() - dateA.getTime(); // Most recent first
+    });
 
   return (
     <div>
@@ -148,7 +154,7 @@ export default function Updates({ updates }: UpdatesProps) {
       {/* View more link */}
       <div className="mt-6 text-center">
         <Link href="/now" className="text-true-gray-400 page-text hover:text-white transition-colors">
-          View changelog →
+          More updates →
         </Link>
       </div>
     </div>
