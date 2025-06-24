@@ -26,21 +26,27 @@ export default function ClientUpdates() {
         const { getPosts } = await import('@/sanity/lib/posts');
         const fetchedPosts = await getPosts();
         
-        // Get the 3 most recent posts, properly sorted by date
-        const currentDate = new Date();
-        const recentPosts = fetchedPosts
-          .filter((post: Post) => {
-            const postDate = new Date(post.publishedAt);
-            return postDate <= currentDate;
-          })
-          .sort((a: Post, b: Post) => {
-            const dateA = new Date(a.publishedAt);
-            const dateB = new Date(b.publishedAt);
-            return dateB.getTime() - dateA.getTime(); // Most recent first
-          })
-          .slice(0, 3);
-        
-        setPosts(recentPosts);
+        // Ensure fetchedPosts is an array before processing
+        if (Array.isArray(fetchedPosts)) {
+          // Get the 3 most recent posts, properly sorted by date
+          const currentDate = new Date();
+          const recentPosts = fetchedPosts
+            .filter((post: Post) => {
+              const postDate = new Date(post.publishedAt);
+              return postDate <= currentDate;
+            })
+            .sort((a: Post, b: Post) => {
+              const dateA = new Date(a.publishedAt);
+              const dateB = new Date(b.publishedAt);
+              return dateB.getTime() - dateA.getTime(); // Most recent first
+            })
+            .slice(0, 3);
+          
+          setPosts(recentPosts);
+        } else {
+          console.warn('getPosts did not return an array:', fetchedPosts);
+          setPosts([]);
+        }
       } catch (error) {
         console.error('Error fetching posts:', error);
         setPosts([]);
