@@ -68,6 +68,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Favicon and PWA Support */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-touch-fullscreen" content="yes" />
+        <meta name="apple-mobile-web-app-title" content="julie.design" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#161616" />
+        
+        {/* iOS PWA Splash Screen */}
+        <script src="https://unpkg.com/ios-pwa-splash@1.0.0/cdn.min.js"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `iosPWASplash('/apple-touch-icon.png', '#161616');`
+        }} />
+        
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet" />

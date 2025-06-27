@@ -1,0 +1,37 @@
+{
+  "name": "Julie Chabin — Product Designer & Early-Stage Partner",
+  "short_name": "julie.design",
+  "description": "Product designer helping early-stage startups launch smarter. Branding, product, and tools—with a clear, fast, no-fluff approach.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#161616",
+  "theme_color": "#161616",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 
