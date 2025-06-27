@@ -163,6 +163,13 @@ body {
   user-select: none;
 }
 
+/* Mobile-specific carousel height */
+@media (max-width: 768px) {
+  .carousel {
+    height: 350px;
+  }
+}
+
 .carousel:active {
   cursor: grabbing;
 }
