@@ -4,7 +4,7 @@ export default function AboutFooter() {
   return (
     <footer className="w-full bg-true-gray-800 pt-24 pb-[100px] relative">
       <div className="w-full flex justify-center">
-        <div className="flex items-center gap-4 sm:gap-6 lg:gap-8 overflow-x-auto overflow-y-hidden scrollbar-hide" style={{ minWidth: '600px' }}>
+        <div className="flex items-center p-8 gap-4 sm:gap-6 lg:gap-8 overflow-x-auto overflow-y-hidden scrollbar-hide" style={{ minWidth: '600px' }}>
           {/* Image 1 */}
           <div 
             className="relative w-32 h-32 rounded-lg overflow-hidden bg-true-gray-700 flex-shrink-0 cursor-pointer transition-all duration-300 ease-in-out hover:scale-105"

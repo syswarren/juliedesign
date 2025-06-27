@@ -79,7 +79,7 @@ const components = {
         <a
           href={value.href}
           rel={rel}
-          className="text-blue-400 hover:text-blue-300 underline"
+          className="link-dotted"
         >
           {children}
         </a>

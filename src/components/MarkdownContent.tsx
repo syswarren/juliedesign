@@ -87,7 +87,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
           a: ({ href, children }) => (
             <a 
               href={href} 
-              className="text-blue-400 hover:text-blue-300 underline"
+              className="link-dotted"
               target="_blank"
               rel="noopener noreferrer"
             >

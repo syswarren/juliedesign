@@ -788,3 +788,36 @@ pre[class*="language-"] {
 .token.inserted {
   color: green;
 }
+
+/* Custom link styling */
+.link-dotted {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.link-dotted:hover {
+  color: #d4d4d4; /* text-true-gray-300 */
+}
+
+/* Button that looks like a link */
+.link-dotted-button {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  transition: color 0.2s ease;
+}
+
+.link-dotted-button:hover {
+  color: #d4d4d4; /* text-true-gray-300 */
+}
