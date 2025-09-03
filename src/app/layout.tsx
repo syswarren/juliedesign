@@ -71,7 +71,7 @@ export default function RootLayout({
       <head>
         {/* Favicon and PWA Support */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -81,10 +81,18 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#161616" />
         
-        {/* iOS PWA Splash Screen */}
-        <script src="https://unpkg.com/ios-pwa-splash@1.0.0/cdn.min.js"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `iosPWASplash('/apple-touch-icon.png', '#161616');`
+        {/* iOS PWA Splash Screen - defer to avoid early DOM access */}
+        <script src="https://unpkg.com/ios-pwa-splash@1.0.0/cdn.min.js" defer></script>
+        <script defer dangerouslySetInnerHTML={{
+          __html: `
+            window.addEventListener('load', function() {
+              try {
+                if (typeof iosPWASplash === 'function') {
+                  iosPWASplash('/apple-touch-icon.png', '#161616');
+                }
+              } catch (e) { /* no-op */ }
+            });
+          `
         }} />
         
         <link rel="preconnect" href="https://fonts.googleapis.com" />
