@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Manrope, Jacquard_12 } from "next/font/google";
 import "./globals.css";
 import { ContactModalProvider } from "@/components/ContactModalContext";
 import PageTransition from "@/components/PageTransition";
@@ -12,6 +12,16 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["200", "400", "600"],
+});
+
+const jacquard = Jacquard_12({
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -95,10 +105,7 @@ export default function RootLayout({
           `
         }} />
         
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Jacquard+12&display=swap" rel="stylesheet" />
-        <link href="https://api.fontshare.com/v2/css?f[]=manrope@200,400,600&display=swap" rel="stylesheet" />
+        {/** Fonts are self-hosted via next/font to avoid render-blocking CSS */}
         
         {/* Structured Data */}
         <script
@@ -140,8 +147,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ fontFamily: "'Manrope', sans-serif" }}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.className} ${jacquard.className} antialiased`}
       >
         <ContactModalProvider>
           <PageTransition>
