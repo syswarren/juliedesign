@@ -12,7 +12,7 @@ export default function SayHiButton({ className }: SayHiButtonProps) {
   return (
     <button 
       onClick={openModal}
-      className={className}
+      className={`${className ?? ''} cursor-pointer`}
     >
       Say hi
     </button>

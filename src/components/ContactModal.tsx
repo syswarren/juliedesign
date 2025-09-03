@@ -85,7 +85,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-true-gray-400 hover:text-white transition-colors"
+          className="absolute top-4 right-4 text-true-gray-400 hover:text-white transition-colors cursor-pointer"
           aria-label="Close modal"
         >
           <X size={24} />
@@ -106,7 +106,7 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </a>
                 <button
                   onClick={copyToClipboard}
-                  className="text-true-gray-400 hover:text-white transition-colors p-1"
+                  className="text-true-gray-400 hover:text-white transition-colors p-1 cursor-pointer"
                   aria-label="Copy email to clipboard"
                 >
                   {copied ? (
