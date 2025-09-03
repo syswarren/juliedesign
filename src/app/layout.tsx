@@ -22,6 +22,7 @@ const manrope = Manrope({
 const jacquard = Jacquard_12({
   subsets: ["latin"],
   weight: "400",
+  variable: "--font-jacquard",
 });
 
 export const metadata: Metadata = {
@@ -147,7 +148,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${manrope.className} ${jacquard.className} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${manrope.className} ${jacquard.variable} antialiased`}
       >
         <ContactModalProvider>
           <PageTransition>
