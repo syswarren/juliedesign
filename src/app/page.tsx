@@ -31,11 +31,11 @@ export default function Home() {
             <Image
               src="/apple-touch-icon.png"
               alt="Julie Chabin logo"
-              width={120}
-              height={120}
+              width={160}
+              height={160}
               priority
               fetchPriority="high"
-              sizes="(max-width: 640px) 25vw, 120px"
+              sizes="(max-width: 640px) 40vw, 160px"
               className="rounded-md"
             />
           </div>
