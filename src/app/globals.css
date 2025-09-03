@@ -73,7 +73,7 @@ body {
 /* stylelint-disable */
 .distort {
   /* Fallback for browsers that don't support backdrop-filter */
-  background-color: rgba(20, 29, 64, 0.473) !important;
+  background-color: rgba(66, 80, 132, 0.473) !important;
   
   /* Multiple backdrop-filter declarations for better browser support */
   /* Using !important to prevent CSS optimizers from removing these */
@@ -119,9 +119,9 @@ body {
 
 /* Button styling */
 .btn-custom {
-  background-color: #0d132a;
+  background-color: #273466;
   color: white;
-  border: 1px solid #27366f;
+  border: 1px solid #56649a;
   transition: all 0.3s ease;
 }
 
@@ -301,6 +301,16 @@ body {
 @keyframes animStar {
   from { transform: translateY(0); }
   to { transform: translateY(-300px); }
+}
+
+/* Page transitions (fade only to avoid affecting fixed elements) */
+.page-transition {
+  animation: fadeInOnly 220ms ease-out both;
+}
+
+@keyframes fadeInOnly {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .gradient-blur > div,

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ContactModalProvider } from "@/components/ContactModalContext";
+import PageTransition from "@/components/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -135,7 +136,9 @@ export default function RootLayout({
         style={{ fontFamily: "'Manrope', sans-serif" }}
       >
         <ContactModalProvider>
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </ContactModalProvider>
         
         {/* Console Message */}
