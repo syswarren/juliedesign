@@ -203,6 +203,12 @@ body {
   align-items: center;
 }
 
+/* Ensure gallery content is above decorative layers */
+.gallery {
+  position: relative;
+  z-index: 2;
+}
+
 .gallery-slides-wrapper img,
 .gallery-image {
   object-fit: cover;
@@ -266,6 +272,35 @@ body {
   inset: auto 0 0 0;
   height: 10%;
   pointer-events: none;
+}
+
+/* Floating Stars */
+.stars-container {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 260px; /* Top band */
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.stars-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  animation-name: animStar;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.stars-layer-cont {
+  position: absolute;
+}
+
+@keyframes animStar {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
 }
 
 .gradient-blur > div,

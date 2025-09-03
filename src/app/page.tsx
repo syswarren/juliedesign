@@ -7,11 +7,13 @@ import RevealFooter from '@/components/RevealFooter';
 import CompanyLogos from '@/components/CompanyLogos';
 import SayHiButton from '@/components/SayHiButton';
 import { galleryItems } from '@/data/galleryData';
+import Stars from '@/components/Stars';
 import { workPrinciples } from '@/data/workPrinciplesData';
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
+    <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200 relative z-10">
+      <Stars />
       {/* Floating Menu */}
       <FloatingMenu />
 

@@ -1,6 +1,9 @@
 'use client';
 
 import FloatingMenu from '@/components/FloatingMenu';
+import Stars from '@/components/Stars';
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
 import PortableText from '@/components/PortableText';
 import { getPosts, Post } from '@/sanity/lib/posts';
 import Image from 'next/image';
@@ -93,11 +96,17 @@ export default function NowPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
+      <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200 relative z-10">
+        <Stars />
         <FloatingMenu />
         <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
           <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-            <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+            <div className="flex items-center sm:-ml-8">
+              <Link href="/" aria-label="Back to home" className="hidden sm:inline-flex text-true-gray-300 hover:text-white transition-colors cursor-pointer mr-2">
+                <ChevronLeft size={24} />
+              </Link>
+              <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+            </div>
             <p className="text-true-gray-300 mb-10" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
           </header>
           <div className="text-center text-true-gray-400">Loading posts...</div>
@@ -108,11 +117,17 @@ export default function NowPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
+      <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200 relative z-10">
+        <Stars />
         <FloatingMenu />
         <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
           <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-            <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+            <div className="flex items-center sm:-ml-8">
+              <Link href="/" aria-label="Back to home" className="hidden sm:inline-flex text-true-gray-300 hover:text-white transition-colors cursor-pointer mr-2">
+                <ChevronLeft size={24} />
+              </Link>
+              <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+            </div>
             <p className="text-true-gray-300 mb-10" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
           </header>
           <div className="text-center text-red-400">{error}</div>
@@ -122,14 +137,20 @@ export default function NowPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200">
+    <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200 relative z-10">
+      <Stars />
       {/* Floating Menu */}
       <FloatingMenu />
 
       {/* Header */}
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-          <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+          <div className="flex items-center sm:-ml-8">
+            <Link href="/" aria-label="Back to home" className="hidden sm:inline-flex text-true-gray-300 hover:text-white transition-colors cursor-pointer mr-2">
+              <ChevronLeft size={24} />
+            </Link>
+            <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Now</h1>
+          </div>
           <p className="text-true-gray-300 mb-10" style={{ fontSize: '20px' }}>Changelog, updates, and more</p>
         </header>
       </div>
