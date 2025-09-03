@@ -6,6 +6,7 @@ import FloatingMenu from '@/components/FloatingMenu';
 import RevealFooter from '@/components/RevealFooter';
 import CompanyLogos from '@/components/CompanyLogos';
 import SayHiButton from '@/components/SayHiButton';
+import ScrollToTop from '@/components/ScrollToTop';
 import { galleryItems } from '@/data/galleryData';
 import Stars from '@/components/Stars';
 import { workPrinciples } from '@/data/workPrinciplesData';
@@ -13,6 +14,7 @@ import { workPrinciples } from '@/data/workPrinciplesData';
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-true-gray-800 text-true-gray-200 relative z-10">
+      <ScrollToTop />
       <Stars />
       {/* Floating Menu */}
       <FloatingMenu />
@@ -42,7 +44,7 @@ export default function Home() {
 
       {/* Gallery - Full Width */}
       <section className="w-full py-16 bg-true-gray-800">
-        <InfiniteGallery items={galleryItems} height="60vh" animationDuration={120} />
+        <InfiniteGallery items={galleryItems} height="60vh" speedPxPerSec={30} />
       </section>
 
       {/* Main Content Container - Continued */}

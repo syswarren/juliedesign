@@ -197,7 +197,9 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  animation: slide var(--animation-duration) linear infinite;
+  width: max-content; /* track fits two concatenated copies */
+  animation: slide-marquee var(--animation-duration) linear infinite;
+  will-change: transform;
 }
 
 .carousel .gallery-slides-wrapper.paused {
@@ -205,10 +207,10 @@ body {
 }
 
 .gallery-image-container {
-  margin: 0 6px;
+  display: inline-block;
+  vertical-align: middle;
   height: 100%;
-  display: flex;
-  align-items: center;
+  margin: 0 12px 0 0;
 }
 
 /* Ensure gallery content is above decorative layers */
@@ -226,11 +228,27 @@ body {
   min-width: auto !important;
   min-height: auto !important;
   pointer-events: none;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-@keyframes slide {
+@keyframes slide { /* legacy -smooth usage */
   to {
     transform: translateX(-100%);
+  }
+}
+
+/* Two-copy marquee: move by half the track width for seamless loop */
+@keyframes slide-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Safari/WebKit: speed up marquee compared to other browsers */
+@supports (-webkit-touch-callout: none) {
+  .carousel .gallery-slides-wrapper {
+    animation-duration: 120s;
   }
 }
 
@@ -264,14 +282,17 @@ body {
 
 .gallery-slides-wrapper-smooth {
   height: 100%;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
+  display: block;
+  white-space: nowrap;
+  font-size: 0;
 }
 
 /* Prevent cropping on ultra-wide/large screens */
 .gallery-image {
   object-fit: contain;
+  display: block;
+  height: 100%;
+  width: auto;
 }
 
 /* Progressive Blur Effect */

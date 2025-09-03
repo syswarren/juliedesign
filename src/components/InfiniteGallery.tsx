@@ -1,7 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
-import Image from 'next/image';
+import { useRef, useEffect, useState, useCallback } from 'react';
 
 interface GalleryItem {
   id: number;
@@ -12,171 +11,189 @@ interface GalleryItem {
 interface InfiniteGalleryProps {
   items: GalleryItem[];
   height?: string;
-  animationDuration?: number;
+  speedPxPerSec?: number; // base auto-scroll speed
 }
 
-export default function InfiniteGallery({ 
-  items, 
-  height = "200px", 
-  animationDuration = 20 
+export default function InfiniteGallery({
+  items,
+  height = '60vh',
+  speedPxPerSec = 30
 }: InfiniteGalleryProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
-  const scrollPosition = useRef(0);
-  const lastTimeRef = useRef<number>(0);
+  const [isPointerDown, setIsPointerDown] = useState(false);
+  const copies = 2; // render 2 copies for seamless loop
 
-  // Create multiple copies of items for seamless infinite scroll
-  const extendedItems = [...items, ...items, ...items];
+  // Animation state
+  const translateXRef = useRef(0);
+  const velocityRef = useRef(0);
+  const baseSpeedRef = useRef(speedPxPerSec);
+  const lastTsRef = useRef<number>(0);
+  const lastPointerXRef = useRef<number>(0);
+  const setWidthRef = useRef<number>(0);
+  const rafRef = useRef<number | null>(null);
 
-  const scroll = useCallback((timestamp: number) => {
-    if (!carouselRef.current || isPaused || isDragging) {
-      animationRef.current = requestAnimationFrame(scroll);
+  const extended = Array.from({ length: copies }).flatMap((_, i) =>
+    items.map((it) => ({ ...it, id: it.id + i * 100000 }))
+  );
+
+  // Measure width of a single set (sum of first N items)
+  const measureSetWidth = useCallback(() => {
+    const track = trackRef.current;
+    if (!track) return 0;
+    let width = 0;
+    let counted = 0;
+    for (let i = 0; i < track.children.length && counted < items.length; i += 1) {
+      const el = track.children[i] as HTMLElement;
+      width += el.offsetWidth; // includes border/margins via layout
+      counted += 1;
+    }
+    const oneSet = Math.max(1, Math.round(width));
+    setWidthRef.current = oneSet;
+    return oneSet;
+  }, [items.length]);
+
+  const loopPosition = useCallback((x: number) => {
+    const w = setWidthRef.current || measureSetWidth();
+    if (w <= 0) return x;
+    // Keep x in [-w, 0) for stable transforms
+    while (x <= -w) x += w;
+    while (x > 0) x -= w;
+    return x;
+  }, [measureSetWidth]);
+
+  const dragAccumRef = useRef(0);
+
+  const animate = useCallback((ts: number) => {
+    if (!containerRef.current || !trackRef.current) {
+      rafRef.current = requestAnimationFrame(animate);
       return;
     }
+    if (lastTsRef.current === 0) lastTsRef.current = ts;
+    const dt = (ts - lastTsRef.current) / 1000; // seconds
+    lastTsRef.current = ts;
 
-    const container = carouselRef.current;
-    const itemWidth = container.scrollWidth / 3; // Since we have 3 copies
-    
-    // Use timestamp for smooth, consistent animation
-    if (lastTimeRef.current === 0) lastTimeRef.current = timestamp;
-    const deltaTime = timestamp - lastTimeRef.current;
-    lastTimeRef.current = timestamp;
-    
-    // Speed calculation: pixels per second, much slower
-    const pixelsPerSecond = itemWidth / (animationDuration * 1000);
-    const pixelsToMove = (pixelsPerSecond * deltaTime);
-    
-    scrollPosition.current += pixelsToMove;
-    
-    // Reset position when we've scrolled through one complete set
-    if (scrollPosition.current >= itemWidth) {
-      scrollPosition.current = 0;
+    // Auto-scroll base speed when not actively dragging
+    const base = isPointerDown ? 0 : baseSpeedRef.current;
+    let vx = velocityRef.current;
+
+    // Apply base speed and current velocity
+    let dx = (base + vx) * dt;
+    // Apply any drag delta accumulated this frame
+    const dragDx = dragAccumRef.current;
+    dragAccumRef.current = 0;
+    let x = translateXRef.current - dx + dragDx; // negative moves left
+
+    // If actively dragging, set velocity based on recent drag delta
+    if (isPointerDown) {
+      velocityRef.current = -dragDx * 8; // scale factor for inertia
+      vx = velocityRef.current;
     }
-    
-    container.scrollLeft = scrollPosition.current;
-    animationRef.current = requestAnimationFrame(scroll);
-  }, [isPaused, isDragging, animationDuration]);
+
+    // Friction on velocity
+    const friction = 0.92;
+    vx *= friction;
+    if (Math.abs(vx) < 0.02) vx = 0;
+    velocityRef.current = vx;
+
+    x = loopPosition(x);
+    translateXRef.current = x;
+    trackRef.current.style.transform = `translate3d(${x}px, 0, 0)`;
+
+    rafRef.current = requestAnimationFrame(animate);
+  }, [isPointerDown, loopPosition]);
 
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(scroll);
+    // Kick off animation
+    rafRef.current = requestAnimationFrame(animate);
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [scroll]);
+  }, [animate]);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  // Measure on mount and resize
+  useEffect(() => {
+    const normalizeAfterMeasure = () => {
+      const w = measureSetWidth();
+      // Normalize position after measure
+      translateXRef.current = loopPosition(translateXRef.current);
+      if (trackRef.current) {
+        trackRef.current.style.transform = `translate3d(${translateXRef.current}px, 0, 0)`;
+      }
+      return w;
+    };
+
+    // Stabilize measurement across a few frames for Safari
+    let frames = 0;
+    const stabilize = () => {
+      frames += 1;
+      normalizeAfterMeasure();
+      if (frames < 3) requestAnimationFrame(stabilize);
+    };
+    requestAnimationFrame(stabilize);
+
+    const ro = new ResizeObserver(() => {
+      // Re-measure and normalize, throttled via rAF
+      requestAnimationFrame(stabilize);
+    });
+    if (containerRef.current) ro.observe(containerRef.current);
+    if (trackRef.current) ro.observe(trackRef.current);
+    return () => ro.disconnect();
+  }, [measureSetWidth, loopPosition]);
+
+  // Pointer/drag handlers
+  const onPointerDown = (e: React.PointerEvent) => {
     setIsDragging(true);
-    setStartX(e.pageX);
-    setScrollLeft(carouselRef.current?.scrollLeft || 0);
-    setIsPaused(true);
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
+    setIsPointerDown(true);
+    lastPointerXRef.current = e.clientX;
   };
 
-  const handleMouseLeave = () => {
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!isPointerDown) return;
+    const currentX = e.clientX;
+    const delta = currentX - lastPointerXRef.current;
+    lastPointerXRef.current = currentX;
+    // Accumulate delta to be applied in the animation frame
+    dragAccumRef.current += delta;
+  };
+
+  const endDrag = () => {
+    setIsPointerDown(false);
     setIsDragging(false);
-    setIsPaused(false);
-    if (carouselRef.current) {
-      scrollPosition.current = carouselRef.current.scrollLeft;
-    }
-    lastTimeRef.current = 0; // Reset for smooth resume
-    animationRef.current = requestAnimationFrame(scroll);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    setIsPaused(false);
-    if (carouselRef.current) {
-      scrollPosition.current = carouselRef.current.scrollLeft;
-    }
-    lastTimeRef.current = 0; // Reset for smooth resume
-    animationRef.current = requestAnimationFrame(scroll);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !carouselRef.current) return;
-    e.preventDefault();
-    const x = e.pageX;
-    const walk = (x - startX) * 1.5; // Sensitivity multiplier
-    const newScrollLeft = scrollLeft - walk;
-    carouselRef.current.scrollLeft = newScrollLeft;
-    scrollPosition.current = newScrollLeft;
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX);
-    setScrollLeft(carouselRef.current?.scrollLeft || 0);
-    setIsPaused(true);
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current);
-    }
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || !carouselRef.current) return;
-    const x = e.touches[0].pageX;
-    const walk = (x - startX) * 1.5;
-    const newScrollLeft = scrollLeft - walk;
-    carouselRef.current.scrollLeft = newScrollLeft;
-    scrollPosition.current = newScrollLeft;
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    setIsPaused(false);
-    if (carouselRef.current) {
-      scrollPosition.current = carouselRef.current.scrollLeft;
-    }
-    lastTimeRef.current = 0; // Reset for smooth resume
-    animationRef.current = requestAnimationFrame(scroll);
   };
 
   return (
     <section className="gallery">
-      <div 
-        ref={carouselRef}
+      <div
+        ref={containerRef}
         className="carousel-smooth"
-        style={{ 
+        style={{
           height: 'var(--gallery-height)',
           maxHeight: '680px',
+          overflow: 'hidden',
           cursor: isDragging ? 'grabbing' : 'grab'
         }}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
+        onPointerCancel={endDrag}
       >
-        <div className="gallery-slides-wrapper-smooth">
-          {extendedItems.map((item, index) => (
-            <div key={`${item.id}-${Math.floor(index / items.length)}`} className="gallery-image-container">
-              <Image
+        <div
+          ref={trackRef}
+          className="gallery-slides-wrapper-smooth"
+          style={{ willChange: 'transform' }}
+        >
+          {extended.map((item, index) => (
+            <div key={`${item.id}-${index}`} className="gallery-image-container">
+              <img
                 src={item.src}
                 alt={item.alt}
-                width={0}
-                height={0}
-                sizes="60vh"
-                priority={index === 0}
-                loading={index === 0 ? 'eager' : 'lazy'}
-                fetchPriority={index === 0 ? 'high' as any : undefined}
                 className="gallery-image"
+                draggable={false}
+                loading={'lazy'}
                 style={{ height: '100%', maxHeight: '680px', width: 'auto' }}
-                onError={() => {
-                  console.error('Failed to load image:', item.src);
-                }}
-                onLoad={() => {
-                  // Image loaded successfully
-                }}
               />
             </div>
           ))}
@@ -184,4 +201,4 @@ export default function InfiniteGallery({
       </div>
     </section>
   );
-} 
+}
