@@ -147,7 +147,6 @@ export default function InfiniteGallery({
         style={{ 
           height: 'var(--gallery-height)',
           maxHeight: '680px',
-          overflow: 'hidden',
           cursor: isDragging ? 'grabbing' : 'grab'
         }}
         onMouseDown={handleMouseDown}
