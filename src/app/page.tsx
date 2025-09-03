@@ -21,7 +21,7 @@ export default function Home() {
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         {/* Header */}
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-          <h1 className="font-bold heading-accent" style={{ fontSize: '20px' }}>Julie Chabin</h1>
+          <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Julie Chabin</h1>
           <p className="text-true-gray-300" style={{ fontSize: '20px' }}>One head, several hats. Mostly design.</p>
         </header>
 
@@ -42,7 +42,7 @@ export default function Home() {
 
       {/* Gallery - Full Width */}
       <section className="w-full py-16 bg-true-gray-800">
-        <InfiniteGallery items={galleryItems} height="60vh" animationDuration={180} />
+        <InfiniteGallery items={galleryItems} height="60vh" animationDuration={120} />
       </section>
 
       {/* Main Content Container - Continued */}

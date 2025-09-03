@@ -167,7 +167,9 @@ export default function InfiniteGallery({
                 width={0}
                 height={0}
                 sizes="60vh"
-                priority={index < items.length}
+                priority={index === 0}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                fetchPriority={index === 0 ? 'high' as any : undefined}
                 className="gallery-image"
                 style={{ height: '100%', maxHeight: '680px', width: 'auto' }}
                 onError={() => {
