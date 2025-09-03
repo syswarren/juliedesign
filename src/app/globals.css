@@ -11,7 +11,7 @@
 
 :root {
   --background: #1a1a1a;
-  --foreground: #e5e5e5;
+  --foreground: #dbe0f9;
   --gallery-height: 60vh;
 }
 
@@ -25,7 +25,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1a1a1a;
-    --foreground: #e5e5e5;
+    --foreground: #dbe0f9;
   }
 }
 
@@ -61,7 +61,7 @@ body {
 }
 
 .text-true-gray-200 {
-  color: #e5e5e5;
+  color: #dbe0f9;
 }
 
 .text-true-gray-300 {
@@ -73,7 +73,7 @@ body {
 }
 
 .hover\:bg-true-gray-200:hover {
-  background-color: #e5e5e5;
+  background-color: #dbe0f9;
 }
 
 /* Distort effect for floating menu */
@@ -673,7 +673,7 @@ body {
 
 /* Markdown Content Styling */
 .markdown-content {
-  color: #e5e5e5;
+  color: #dbe0f9;
 }
 
 .markdown-content h1,
