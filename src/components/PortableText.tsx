@@ -4,20 +4,28 @@ import { PortableText as PortableTextComponent } from '@portabletext/react'
 import { urlFor } from '@/sanity/lib/image'
 import Image from 'next/image'
 import { useEffect } from 'react'
-import Prism from 'prismjs'
 
-// Import core languages statically
-import 'prismjs/components/prism-javascript'
-import 'prismjs/components/prism-typescript'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/components/prism-tsx'
-import 'prismjs/components/prism-markup'
-import 'prismjs/components/prism-css'
-import 'prismjs/components/prism-json'
-import 'prismjs/components/prism-markdown'
-import 'prismjs/components/prism-python'
-import 'prismjs/components/prism-bash'
-import 'prismjs/components/prism-sql'
+// Remove heavy static Prism imports and load them lazily on client
+let Prism: any = null
+async function ensurePrismLoaded(): Promise<void> {
+  if (Prism) return
+  const prismCore = await import('prismjs')
+  Prism = prismCore.default || prismCore
+  // Load only a focused set of languages
+  await Promise.all([
+    import('prismjs/components/prism-javascript'),
+    import('prismjs/components/prism-typescript'),
+    import('prismjs/components/prism-jsx'),
+    import('prismjs/components/prism-tsx'),
+    import('prismjs/components/prism-markup'),
+    import('prismjs/components/prism-css'),
+    import('prismjs/components/prism-json'),
+    import('prismjs/components/prism-markdown'),
+    import('prismjs/components/prism-python'),
+    import('prismjs/components/prism-bash'),
+    import('prismjs/components/prism-sql'),
+  ])
+}
 
 const components = {
   types: {
@@ -39,16 +47,24 @@ const components = {
     },
     codeBlock: ({ value }: any) => {
       const { code, language, filename } = value
-      
+
       useEffect(() => {
-        // Simple highlighting without dynamic imports
-        try {
-          Prism.highlightAll()
-        } catch (error) {
-          console.warn('Prism.js highlighting failed:', error)
+        let isMounted = true
+        ;(async () => {
+          try {
+            await ensurePrismLoaded()
+            if (isMounted && Prism?.highlightAll) {
+              Prism.highlightAll()
+            }
+          } catch (error) {
+            console.warn('Prism.js highlighting failed:', error)
+          }
+        })()
+        return () => {
+          isMounted = false
         }
       }, [code, language])
-      
+
       return (
         <div className="my-6">
           {filename && (

@@ -34,6 +34,16 @@ export default function InfiniteGallery({
   const setWidthRef = useRef<number>(0);
   const rafRef = useRef<number | null>(null);
 
+  // Respect reduced motion
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Lower base speed on small screens
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const isSmall = window.matchMedia('(max-width: 640px)').matches;
+    baseSpeedRef.current = prefersReducedMotion ? 0 : isSmall ? Math.max(10, speedPxPerSec / 2) : speedPxPerSec;
+  }, [prefersReducedMotion, speedPxPerSec]);
+
   const extended = Array.from({ length: copies }).flatMap((_, i) =>
     items.map((it) => ({ ...it, id: it.id + i * 100000 }))
   );
@@ -74,6 +84,12 @@ export default function InfiniteGallery({
     const dt = (ts - lastTsRef.current) / 1000; // seconds
     lastTsRef.current = ts;
 
+    // Pause when tab hidden or reduced motion requested
+    if (document.hidden || prefersReducedMotion) {
+      rafRef.current = requestAnimationFrame(animate);
+      return;
+    }
+
     // Auto-scroll base speed when not actively dragging
     const base = isPointerDown ? 0 : baseSpeedRef.current;
     let vx = velocityRef.current;
@@ -102,13 +118,19 @@ export default function InfiniteGallery({
     trackRef.current.style.transform = `translate3d(${x}px, 0, 0)`;
 
     rafRef.current = requestAnimationFrame(animate);
-  }, [isPointerDown, loopPosition]);
+  }, [isPointerDown, loopPosition, prefersReducedMotion]);
 
   useEffect(() => {
     // Kick off animation
     rafRef.current = requestAnimationFrame(animate);
+    const handleVisibility = () => {
+      // Reset timestamp to avoid a large dt after tab switches
+      lastTsRef.current = 0;
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
     return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current as number);
     };
   }, [animate]);
 
@@ -193,6 +215,9 @@ export default function InfiniteGallery({
                 className="gallery-image"
                 draggable={false}
                 loading={'lazy'}
+                decoding="async"
+                fetchPriority="low"
+                sizes="(max-width: 768px) 80vw, 40vw"
                 style={{ height: '100%', maxHeight: '680px', width: 'auto' }}
               />
             </div>
