@@ -78,7 +78,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
       />
       {/* Modal */}
       <div
-        className={`relative bg-true-gray-800 border-t border-white/20 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transition-all duration-300 ease-out
+        className={`relative bg-true-gray-800 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl transition-all duration-300 ease-out
+          border-t-[1px] border-t-[#9591ea] border-b-[1px] border-b-[#ff73f1]
           ${animateIn ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-2'}`}
         style={{ zIndex: 60 }}
       >

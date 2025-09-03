@@ -129,13 +129,17 @@ body {
 .btn-custom {
   background-color: #273466;
   color: white;
-  border: 1px solid #56649a;
+  border-top: 1px solid #56649a;
+  border-bottom: 1px solid #56649a;
+  border-left: none;
+  border-right: none;
   transition: all 0.3s ease;
 }
 
 .btn-custom:hover {
-  border-color: #9591ea;
-  background-color: #5f5d9b;
+  background-color: #41406f;
+  border-top-color: #9591ea;
+  border-bottom-color: #ff73f1;
 }
 
 .btn-custom:focus-visible {
