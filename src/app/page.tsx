@@ -1,5 +1,4 @@
 import InfiniteGallery from '@/components/InfiniteGallery';
-import Image from 'next/image';
 import GradientBlur from '@/components/GradientBlur';
 import ClientUpdates from '@/components/ClientUpdates';
 import WorkPrinciples from '@/components/WorkPrinciples';
@@ -26,19 +25,6 @@ export default function Home() {
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
           <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Julie Chabin</h1>
           <p className="text-true-gray-300" style={{ fontSize: '20px' }}>One head, several hats. Mostly design.</p>
-          {/* Small above-the-fold hero image (LCP candidate) */}
-          <div className="mt-4">
-            <Image
-              src="/apple-touch-icon.png"
-              alt="Julie Chabin logo"
-              width={160}
-              height={160}
-              priority
-              fetchPriority="high"
-              sizes="(max-width: 640px) 40vw, 160px"
-              className="rounded-md"
-            />
-          </div>
         </header>
 
         {/* Intro */}
