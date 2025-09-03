@@ -145,7 +145,7 @@ export default function InfiniteGallery({
         ref={carouselRef}
         className="carousel-smooth"
         style={{ 
-          height,
+          height: 'var(--gallery-height)',
           maxHeight: '680px',
           overflow: 'hidden',
           cursor: isDragging ? 'grabbing' : 'grab'

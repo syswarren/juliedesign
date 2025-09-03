@@ -12,6 +12,7 @@
 :root {
   --background: #1a1a1a;
   --foreground: #e5e5e5;
+  --gallery-height: 60vh;
 }
 
 @theme inline {
@@ -25,6 +26,13 @@
   :root {
     --background: #1a1a1a;
     --foreground: #e5e5e5;
+  }
+}
+
+/* Mobile gallery height */
+@media (max-width: 768px) {
+  :root {
+    --gallery-height: 40vh;
   }
 }
 
