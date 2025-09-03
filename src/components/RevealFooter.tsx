@@ -53,7 +53,7 @@ export default function RevealFooter() {
         <div
           className="w-full h-full"
           style={{
-            backgroundImage: 'url(/footer-sept.png)',
+            backgroundImage: 'url(/footer-sept.webp)',
             backgroundRepeat: 'repeat-x',
             backgroundSize: 'auto 420px',
             backgroundPosition: 'bottom center',
