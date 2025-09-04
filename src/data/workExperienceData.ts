@@ -10,7 +10,7 @@ export const workExperiences: WorkExperienceItem[] = [
   {
     logo: "/company-logos/coven.png",
     company: "Coven",
-    title: "Freelance Product Designer",
+    title: "Design and Product advisor",
     startDate: "2023",
     endDate: "Present"
   },

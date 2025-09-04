@@ -33,10 +33,10 @@ export default function Home() {
             I help turn ideas into real, thoughtful products—easy to use, hard to ignore, and ready to grow.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Previously, I led design at Product Hunt. I created features, shaped strategy, and scaled design with a small, fast-moving remote team.
+            Previously, I led design at Product Hunt. I created a strong user experience and brand, shaped strategy, and scaled design with a small, fast-moving remote team.
           </p>
           <p className="mb-6 max-w-xl text-true-gray-200 paragraph-text">
-            Now I work with founders to shape their product&apos;s first version, raise funds, and get noticed. I also build my own tools. It starts with curiosity, and always ends in learning.
+            Now I work with founders to build their product&apos;s first version, raise funds, and get noticed. I also vibe code my own tools. It starts with curiosity, and always ends in learning.
           </p>
           <SayHiButton className="px-6 py-2 mt-4 btn-custom w-fit page-text rounded-full" />
         </section>
