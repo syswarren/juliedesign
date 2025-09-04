@@ -12,6 +12,7 @@ const FloatingMenu = dynamic(() => import('@/components/FloatingMenu'));
 const ClientUpdates = dynamic(() => import('@/components/ClientUpdates'));
 const RevealFooter = dynamic(() => import('@/components/RevealFooter'));
 import { workPrinciples } from '@/data/workPrinciplesData';
+import HoverScramble from '@/components/HoverScramble';
 
 export default function Home() {
   return (
@@ -25,7 +26,9 @@ export default function Home() {
       <div className="w-full mx-auto px-6 sm:px-6 lg:px-8" style={{ maxWidth: '600px' }}>
         {/* Header */}
         <header className="w-full flex flex-col pt-20 sm:pt-32 md:pt-40" style={{ paddingBottom: '32px' }}>
-          <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>Julie Chabin</h1>
+          <h1 className="font-bold text-white" style={{ fontSize: '20px' }}>
+            <HoverScramble fromText="Julie Chabin" toText="@syswarren" durationMs={1200} delayMs={150} />
+          </h1>
           <p className="text-true-gray-300" style={{ fontSize: '20px' }}>One head, several hats. Mostly design.</p>
         </header>
 
