@@ -1,0 +1,29 @@
+.stars-container {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 260px;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.stars-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  animation-name: animStar;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.stars-layer-cont {
+  position: absolute;
+}
+
+@keyframes animStar {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
+}
+
+

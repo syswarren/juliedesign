@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useEffect, useState, useCallback } from 'react';
+import styles from './InfiniteGallery.module.css';
 
 interface GalleryItem {
   id: number;
@@ -186,10 +187,10 @@ export default function InfiniteGallery({
   };
 
   return (
-    <section className="gallery">
+    <section className={styles['gallery']}>
       <div
         ref={containerRef}
-        className="carousel-smooth"
+        className={styles['carousel-smooth']}
         style={{
           height: 'var(--gallery-height)',
           maxHeight: '680px',
@@ -204,15 +205,15 @@ export default function InfiniteGallery({
       >
         <div
           ref={trackRef}
-          className="gallery-slides-wrapper-smooth"
+          className={styles['gallery-slides-wrapper-smooth']}
           style={{ willChange: 'transform' }}
         >
           {extended.map((item, index) => (
-            <div key={`${item.id}-${index}`} className="gallery-image-container">
+            <div key={`${item.id}-${index}`} className={styles['gallery-image-container']}>
               <img
                 src={item.src}
                 alt={item.alt}
-                className="gallery-image"
+                className={styles['gallery-image']}
                 draggable={false}
                 loading={'lazy'}
                 decoding="async"

@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useEffect, useState } from 'react';
+import styles from './Stars.module.css';
 
 function generateBoxShadows(count: number, areaSize = 2000): string {
   const parts: string[] = [];
@@ -24,7 +25,7 @@ function StarsLayer({ size, count, animationDurationSec }: StarsLayerProps) {
   return (
     <>
       <div
-        className="stars-layer"
+        className={styles['stars-layer']}
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -34,7 +35,7 @@ function StarsLayer({ size, count, animationDurationSec }: StarsLayerProps) {
       />
       {/* Continuation for seamless vertical loop */}
       <div
-        className="stars-layer stars-layer-cont"
+        className={`${styles['stars-layer']} ${styles['stars-layer-cont']}`}
         style={{
           width: `${size}px`,
           height: `${size}px`,
@@ -56,7 +57,7 @@ export default function Stars() {
   }
 
   return (
-    <div className="stars-container" aria-hidden="true">
+    <div className={styles['stars-container']} aria-hidden="true">
       <StarsLayer size={1} count={250} animationDurationSec={80} />
       <StarsLayer size={1} count={80} animationDurationSec={120} />
       <StarsLayer size={2} count={30} animationDurationSec={160} />

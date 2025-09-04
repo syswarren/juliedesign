@@ -1,8 +1,10 @@
+import styles from './GradientBlur.module.css';
+
 export default function GradientBlur() {
   return (
     <>
       {/* Left Side Progressive Blur */}
-      <div className="gradient-blur-left">
+      <div className={styles['gradient-blur-left']}>
         <div></div>
         <div></div>
         <div></div>
@@ -12,7 +14,7 @@ export default function GradientBlur() {
       </div>
       
       {/* Right Side Progressive Blur */}
-      <div className="gradient-blur-right">
+      <div className={styles['gradient-blur-right']}>
         <div></div>
         <div></div>
         <div></div>

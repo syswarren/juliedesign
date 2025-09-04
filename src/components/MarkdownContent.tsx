@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
-import 'highlight.js/styles/github-dark.css';
+import styles from './MarkdownContent.module.css';
 
 interface MarkdownContentProps {
   content: string;
@@ -12,7 +12,7 @@ interface MarkdownContentProps {
 
 export default function MarkdownContent({ content }: MarkdownContentProps) {
   return (
-    <div className="markdown-content">
+    <div className={styles['markdown-content']}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
@@ -58,7 +58,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
             const isInline = !match;
             return !isInline ? (
               <code
-                className={`hljs ${className}`}
+                className={`hljs ${className} ${styles['hljs']}`}
                 {...props}
               >
                 {children}
@@ -87,7 +87,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
           a: ({ href, children }) => (
             <a 
               href={href} 
-              className="link-dotted"
+              className={styles['link-dotted']}
               target="_blank"
               rel="noopener noreferrer"
             >

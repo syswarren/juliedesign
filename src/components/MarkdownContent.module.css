@@ -1,0 +1,27 @@
+.markdown-content {
+  color: #dbe0f9;
+}
+
+.link-dotted {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.link-dotted:hover {
+  color: #dbe0f9;
+}
+
+/* Highlight.js container overrides */
+.hljs {
+  background: #080b17 !important;
+  color: #a0a2a5 !important;
+  border-radius: 0.5rem !important;
+  border-color: #080b17;
+  padding: 1rem !important;
+  overflow-x: auto !important;
+}
+
+
