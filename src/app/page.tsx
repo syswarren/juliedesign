@@ -1,14 +1,16 @@
+import dynamic from 'next/dynamic';
 import InfiniteGallery from '@/components/InfiniteGallery';
 import GradientBlur from '@/components/GradientBlur';
-import ClientUpdates from '@/components/ClientUpdates';
 import WorkPrinciples from '@/components/WorkPrinciples';
-import FloatingMenu from '@/components/FloatingMenu';
-import RevealFooter from '@/components/RevealFooter';
 import CompanyLogos from '@/components/CompanyLogos';
 import SayHiButton from '@/components/SayHiButton';
-import ScrollToTop from '@/components/ScrollToTop';
 import { galleryItems } from '@/data/galleryData';
-import Stars from '@/components/Stars';
+// Defer non-critical client components to shrink main chunk
+const Stars = dynamic(() => import('@/components/Stars'), { ssr: false });
+const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'), { ssr: false });
+const FloatingMenu = dynamic(() => import('@/components/FloatingMenu'), { ssr: false });
+const ClientUpdates = dynamic(() => import('@/components/ClientUpdates'), { ssr: false });
+const RevealFooter = dynamic(() => import('@/components/RevealFooter'), { ssr: false });
 import { workPrinciples } from '@/data/workPrinciplesData';
 
 export default function Home() {
