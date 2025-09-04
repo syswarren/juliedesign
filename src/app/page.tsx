@@ -6,11 +6,11 @@ import CompanyLogos from '@/components/CompanyLogos';
 import SayHiButton from '@/components/SayHiButton';
 import { galleryItems } from '@/data/galleryData';
 // Defer non-critical client components to shrink main chunk
-const Stars = dynamic(() => import('@/components/Stars'), { ssr: false });
-const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'), { ssr: false });
-const FloatingMenu = dynamic(() => import('@/components/FloatingMenu'), { ssr: false });
-const ClientUpdates = dynamic(() => import('@/components/ClientUpdates'), { ssr: false });
-const RevealFooter = dynamic(() => import('@/components/RevealFooter'), { ssr: false });
+const Stars = dynamic(() => import('@/components/Stars'));
+const ScrollToTop = dynamic(() => import('@/components/ScrollToTop'));
+const FloatingMenu = dynamic(() => import('@/components/FloatingMenu'));
+const ClientUpdates = dynamic(() => import('@/components/ClientUpdates'));
+const RevealFooter = dynamic(() => import('@/components/RevealFooter'));
 import { workPrinciples } from '@/data/workPrinciplesData';
 
 export default function Home() {
