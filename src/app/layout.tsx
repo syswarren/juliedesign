@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Manrope, Jacquard_12 } from "next/font/google";
 import "./globals.css";
 import { ContactModalProvider } from "@/components/ContactModalContext";
-import PageTransition from "@/components/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -151,9 +150,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${manrope.className} ${jacquard.variable} antialiased`}
       >
         <ContactModalProvider>
-          <PageTransition>
-            {children}
-          </PageTransition>
+          {children}
         </ContactModalProvider>
         
         {/* Console Message */}

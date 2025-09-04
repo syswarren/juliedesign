@@ -51,7 +51,7 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap cursor-pointer touch-manipulation ${
               isActive('/') ? 'text-white dotted-underline' : ''
             }`}
           >
@@ -61,7 +61,7 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/now" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap cursor-pointer touch-manipulation ${
               isActive('/now') ? 'text-white dotted-underline' : ''
             }`}
           >
@@ -71,7 +71,7 @@ export default function FloatingMenu() {
         <li>
           <Link 
             href="/about" 
-            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap ${
+            className={`text-true-gray-300 page-text hover:text-white transition-colors px-2 py-2 rounded-full whitespace-nowrap cursor-pointer touch-manipulation ${
               isActive('/about') ? 'text-white dotted-underline' : ''
             }`}
           >
