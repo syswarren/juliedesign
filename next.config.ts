@@ -7,7 +7,15 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  /* config options here */
+  experimental: {
+    forceSwcTransforms: true,
+  },
+  swcMinify: true,
+  modularizeImports: {
+    'lucide-react': {
+      transform: 'lucide-react/icons/{{member}}',
+    },
+  },
 };
 
 export default nextConfig;
