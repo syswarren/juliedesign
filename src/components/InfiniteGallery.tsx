@@ -208,21 +208,24 @@ export default function InfiniteGallery({
           className={styles['gallery-slides-wrapper-smooth']}
           style={{ willChange: 'transform' }}
         >
-          {extended.map((item, index) => (
+          {extended.map((item, index) => {
+            const isLcpCandidate = index === 0; // first image becomes LCP
+            return (
             <div key={`${item.id}-${index}`} className={styles['gallery-image-container']}>
               <img
                 src={item.src}
                 alt={item.alt}
                 className={styles['gallery-image']}
                 draggable={false}
-                loading={'lazy'}
-                decoding="async"
-                fetchPriority="low"
+                loading={isLcpCandidate ? 'eager' : 'lazy'}
+                decoding={isLcpCandidate ? 'sync' : 'async'}
+                fetchPriority={isLcpCandidate ? 'high' : 'low'}
                 sizes="(max-width: 768px) 80vw, 40vw"
                 style={{ height: '100%', maxHeight: '680px', width: 'auto' }}
               />
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
